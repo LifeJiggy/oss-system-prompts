@@ -350,13 +350,179 @@ cat PR-Templates/Templates/Contributor-Pro.md
 
 ---
 
-## Usage
+## Platform-Specific Usage
+
+### Windows
+
+#### Using Python Templates
+```powershell
+# Open PowerShell or Command Prompt
+
+# Navigate to project folder
+cd C:\Path\To\oss-system-prompts
+
+# Generate PR template
+python PR-Templates\PY\features-file.py
+
+# Generate and save to file
+python PR-Templates\PY\features-bugfix.py > bug-fix-pr.md
+
+# Validate changes
+python -c "from PR_Templates.PY.features_file import validate_file_changes; print(validate_file_changes(['test.py']))"
+```
+
+#### Using JavaScript Templates
+```powershell
+# Navigate to JS folder
+cd PR-Templates\JS
+
+# Generate PR template
+node features-file.js
+
+# Validate changes
+node -e "console.log(require('./features-file').validateFileChanges(['file.js']))"
+
+# List all templates
+dir
+```
+
+#### Using Markdown Templates
+```powershell
+# Open in notepad
+notepad PR-Templates\Templates\Contributor-Pro.md
+
+# Or in VS Code (if installed)
+code PR-Templates\Templates\Contributor-Pro.md
+```
+
+---
+
+### macOS
+
+#### Using Python Templates
+```bash
+# Open Terminal
+
+# Navigate to project
+cd ~/path/to/oss-system-prompts
+
+# Generate PR template
+python3 PR-Templates/PY/features-file.py
+
+# Generate and save to file
+python3 PR-Templates/PY/features-bugfix.py > bug-fix-pr.md
+
+# Copy to clipboard
+python3 PR-Templates/PY/features-review.py | pbcopy
+
+# Validate changes
+python3 -c "from PR_Templates.PY.features_file import validate_file_changes; print(validate_file_changes(['test.py']))"
+```
+
+#### Using JavaScript Templates
+```bash
+# Navigate to JS folder
+cd PR-Templates/JS
+
+# Generate PR template
+node features-file.js
+
+# Copy to clipboard
+node features-review.js | pbcopy
+
+# Validate changes
+node -e "console.log(require('./features-file').validateFileChanges(['file.js']))"
+
+# List all templates
+ls -la
+```
+
+#### Using Markdown Templates
+```bash
+# Open in default editor
+open PR-Templates/Templates/Contributor-Pro.md
+
+# Or in VS Code
+code PR-Templates/Templates/Contributor-Pro.md
+
+# View in terminal
+cat PR-Templates/Templates/Contributor-Pro.md
+
+# Copy to clipboard
+cat PR-Templates/Templates/Contributor-Pro.md | pbcopy
+```
+
+---
+
+### Linux (Ubuntu/Debian)
+
+#### Using Python Templates
+```bash
+# Open Terminal
+
+# Navigate to project
+cd /path/to/oss-system-prompts
+
+# Generate PR template
+python3 PR-Templates/PY/features-file.py
+
+# Generate and save to file
+python3 PR-Templates/PY/features-bugfix.py > bug-fix-pr.md
+
+# Copy to clipboard (requires xclip)
+python3 PR-Templates/PY/features-review.py | xclip -selection clipboard
+
+# Validate changes
+python3 -c "from PR_Templates.PY.features_file import validate_file_changes; print(validate_file_changes(['test.py']))"
+```
+
+#### Using JavaScript Templates
+```bash
+# Navigate to JS folder
+cd PR-Templates/JS
+
+# Generate PR template
+node features-file.js
+
+# Copy to clipboard
+node features-review.js | xclip -selection clipboard
+
+# Validate changes
+node -e "console.log(require('./features-file').validateFileChanges(['file.js']))"
+
+# List all templates
+ls -la
+```
+
+#### Using Markdown Templates
+```bash
+# Edit with nano/vim
+nano PR-Templates/Templates/Contributor-Pro.md
+vim PR-Templates/Templates/Contributor-Pro.md
+
+# View in terminal
+cat PR-Templates/Templates/Contributor-Pro.md
+less PR-Templates/Templates/Contributor-Pro.md
+
+# Copy to clipboard
+cat PR-Templates/Templates/Contributor-Pro.md | xclip -selection clipboard
+```
+
+---
+
+### Quick Reference by Platform
+
+| Task | Windows | macOS | Linux |
+|------|---------|-------|-------|
+| Run Python template | `python` | `python3` | `python3` |
+| Run JS template | `node` | `node` | `node` |
+| Copy to clipboard | Manual | `pbcopy` | `xclip` |
+| Edit template | `notepad` | `open` | `nano` |
+| List files | `dir` | `ls -la` | `ls -la` |
 
 ---
 
 ## Usage
-
-### How to Use These Prompts
 
 These system prompts are designed to be used with AI assistants (like Claude, GPT-4, or others) to get role-specific guidance for OSS development tasks.
 
