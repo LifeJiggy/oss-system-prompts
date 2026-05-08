@@ -16,6 +16,7 @@ A production-ready system prompt collection for AI-assisted OSS development. Eac
 - [Quick Start](#quick-start)
 - [File Index](#file-index)
 - [Categories](#categories)
+- [PR Templates](#pr-templates)
 - [Usage](#usage)
 - [Development](#development)
 - [License](#license)
@@ -239,6 +240,117 @@ ls | grep -i reviewer
 |------|-------------|
 | [github-commands.md](github-commands.md) | GitHub CLI command reference |
 | [branch-workflow.md](branch-workflow.md) | Branch workflow patterns |
+
+---
+
+## PR Templates
+
+This folder contains ready-to-use PR templates for all 32 system prompts. Use these templates when submitting pull requests for each role type.
+
+### Folder Structure
+
+```
+PR-Templates/
+├── PY/                    # Python PR templates (.py scripts)
+│   ├── features-file.py
+│   ├── features-integration.py
+│   ├── features-review.py
+│   ├── features-bugfix.py
+│   ├── features-refactor.py
+│   ├── features-docs.py
+│   └── features-tests.py
+├── JS/                    # JavaScript PR templates (.js scripts)
+│   ├── features-file.js
+│   ├── features-integration.js
+│   ├── features-review.js
+│   ├── features-bugfix.js
+│   ├── features-refactor.js
+│   ├── features-docs.js
+│   └── features-tests.js
+├── Templates/             # Markdown templates (200+ lines each)
+│   ├── architect-Pro.md
+│   ├── Contributor-Pro.md
+│   ├── Reveiwer-Pro.md
+│   ├── Testing-Pro.md
+│   └── ... (29 templates for all system prompts)
+└── README.md
+```
+
+### Template Types
+
+| Type | Format | Use Case |
+|------|--------|----------|
+| Python Scripts | `.py` | Run to generate PR templates, validate changes |
+| JavaScript Scripts | `.js` | Run to generate PR templates, validate changes |
+| Markdown | `.md` | Copy-paste directly into PR description |
+
+### Python Templates (PY/)
+
+Run these scripts to generate and validate PR content:
+
+```bash
+# Generate PR template
+python PR-Templates/PY/features-file.py
+
+# Validate changes
+python -c "from PR_Templates.PY.features_file import validate_file_changes"
+```
+
+### JavaScript Templates (JS/)
+
+Run these scripts to generate and validate PR content:
+
+```bash
+# Generate PR template
+node PR-Templates/JS/features-file.js
+
+# Validate changes
+node -e "require('./PR_Templates/JS/features-file').validateFileChanges(['file.py'])"
+```
+
+### Markdown Templates (Templates/)
+
+Each template is 200+ lines with comprehensive sections:
+
+- **PR Overview** - Summary, type, priority
+- **Changes Details** - Files, dependencies, breaking changes
+- **Testing** - Test commands, results, coverage
+- **Checklists** - Pre-merge, post-merge, security
+- **Documentation** - Required updates, new docs
+- **Approval** - Required reviewers, approvers
+
+### Quick Template Selection
+
+| Need | Template |
+|------|----------|
+| Bug fix | `Templates/Issue-fixer-Pro.md` or `PY/features-bugfix.py` |
+| New feature | `Templates/High-frequence-features-Pro.md` or `PY/features-integration.py` |
+| Code review | `Templates/Reveiwer-Pro.md` or `PY/features-review.py` |
+| Documentation | `Templates/Documentation-Pro.md` or `PY/features-docs.py` |
+| Tests | `Templates/Testing-Pro.md` or `PY/features-tests.py` |
+| Refactoring | `Templates/Low-frequence-features-Pro.md` or `PY/features-refactor.py` |
+
+### Usage
+
+1. **Copy from Templates folder:** Open `Templates/[Role]-Pro.md` and copy into your PR description
+2. **Use Python/JS scripts:** Run the `.py` or `.js` files to generate templates programmatically
+3. **Customize:** Edit placeholders like `<!-- Brief description -->` with your specific details
+
+### Example Workflow
+
+```bash
+# 1. Find template for your change type
+ls PR-Templates/Templates/
+
+# 2. Copy template to clipboard
+cat PR-Templates/Templates/Contributor-Pro.md
+
+# 3. Paste into PR description and fill in details
+```
+
+---
+
+## Usage
 
 ---
 
