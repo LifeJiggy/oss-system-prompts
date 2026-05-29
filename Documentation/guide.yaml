@@ -1,0 +1,379 @@
+# Documentation - Usage Guide
+
+> Comprehensive guide for documentation in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Documentation Overview](#1-documentation-overview)
+2. [Gate 1: Documentation Planning](#2-gate-1-documentation-planning)
+3. [Gate 2: Documentation Writing](#3-gate-2-documentation-writing)
+4. [Gate 3: Documentation Review](#4-gate-3-documentation-review)
+5. [Gate 4: Documentation Maintenance](#5-gate-4-documentation-maintenance)
+6. [File References](#6-file-references)
+7. [Documentation Patterns](#7-documentation-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Documentation Overview
+
+Documentation is the bridge between code and users. Good documentation enables adoption, reduces support burden, and preserves institutional knowledge.
+
+### The Single Core File
+
+| File | Purpose | Lines |
+|------|---------|-------|
+| Documentation-Pro.md | Technical writing, API docs | 1612 |
+
+### Documentation Types
+
+| Type | Purpose | Audience |
+|------|---------|----------|
+| **README** | Project introduction | New users |
+| **API Docs** | Interface documentation | Developers |
+| **Guides** | Step-by-step instructions | Users |
+| **Tutorials** | Learning-oriented content | Beginners |
+| **Reference** | Detailed specifications | Advanced users |
+| **Contributing** | How to contribute | Contributors |
+
+---
+
+## 2. Gate 1: Documentation Planning
+
+### 2.1 Documentation Audit
+
+Before writing:
+
+1. **Inventory existing docs**
+   - README, CONTRIBUTING, API docs
+   - Tutorials, guides, FAQs
+
+2. **Identify gaps**
+   - Missing topics
+   - Outdated content
+   - Poor organization
+
+3. **Prioritize**
+   - High-impact areas first
+   - User-facing features
+   - Complex functionality
+
+### 2.2 Documentation Strategy
+
+| Strategy | Description |
+|----------|-------------|
+| **Doc-first** | Write docs before code |
+| **README-driven** | Start with README |
+| **API-first** | Document API before implementation |
+| **User journey** | Follow user's path |
+
+### 2.3 Planning Integration
+
+Connects to:
+- **Core-Development-Roles**: Contribution patterns
+- **Build-Systems**: Documentation generation
+- **PR-Templates**: Doc PR templates
+
+---
+
+## 3. Gate 2: Documentation Writing
+
+### 3.1 Writing Standards
+
+#### README Structure
+
+```markdown
+# Project Name
+
+> One-line description.
+
+## Features
+- Feature 1
+- Feature 2
+
+## Quick Start
+```bash
+npm install -g project
+project --help
+```
+
+## Usage
+```bash
+project analyze <path>
+```
+
+## Configuration
+See [config docs](docs/configuration.md)
+
+## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## License
+[MIT](LICENSE)
+```
+
+#### API Documentation Pattern
+
+```typescript
+/**
+ * Processes input data and returns results.
+ *
+ * @param data - Input data to process
+ * @param options - Processing options
+ * @returns Processed results
+ *
+ * @example
+ * ```ts
+ * const result = processData({ key: "value" })
+ * console.log(result.status) // "success"
+ * ```
+ */
+export function processData(data: object, options?: Options): Result
+```
+
+### 3.2 Writing Tools
+
+| Tool | Purpose |
+|------|---------|
+| **Typo** | Spell checking |
+| **markdownlint** | Markdown linting |
+| **alex** | Inclusive language |
+| **write-good** | Writing quality |
+
+### 3.3 Writing Integration
+
+Connects to:
+- **Code-Quality**: Linting requirements
+- **CI-CD**: Automated checks
+- **Build-Systems**: Doc generation
+
+---
+
+## 4. Gate 3: Documentation Review
+
+### 4.1 Review Checklist
+
+- [ ] Accurate (matches actual behavior)
+- [ ] Complete (no missing sections)
+- [ ] Clear (understandable to target audience)
+- [ ] Current (up-to-date with latest version)
+- [ ] Examples work (copy-paste verified)
+- [ ] Links valid (no broken links)
+- [ ] Well-formatted (proper Markdown)
+
+### 4.2 Review Process
+
+```
+Author → Reviewer → Editor → Publish
+```
+
+1. **Technical Review**: Accuracy of content
+2. **Editorial Review**: Clarity and style
+3. **Link Check**: Broken links
+4. **Spell Check**: Typos and grammar
+
+### 4.3 Automation
+
+```yaml
+# CI checks for documentation
+- name: Lint documentation
+  run: npx markdownlint '**/*.md'
+  
+- name: Check links
+  run: npx linkchecker docs/
+  
+- name: Spell check
+  run: npx cspell '**/*.md'
+```
+
+---
+
+## 5. Gate 4: Documentation Maintenance
+
+### 5.1 Maintenance Schedule
+
+| Frequency | Task |
+|-----------|------|
+| **Per release** | Update for new features |
+| **Monthly** | Link check, spell check |
+| **Quarterly** | Content audit |
+| **Annually** | Style guide review |
+
+### 5.2 Update Triggers
+
+Documentation should be updated when:
+
+- [ ] New features added
+- [ ] Breaking changes released
+- [ ] User feedback indicates confusion
+- [ ] API changes made
+- [ ] Bug fixes affect behavior
+
+### 5.3 Version Management
+
+| Approach | Description |
+|----------|-------------|
+| **Versioned docs** | /docs/v1.0/, /docs/v2.0/ |
+| **Versioned README** | README.v1.md, README.v2.md |
+| **Single source** | One docs site with version selector |
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| Documentation-Pro.md | 1612 | Technical writing guide |
+| guide.yaml | This file | Usage guide |
+
+### 6.2 Integration Points
+
+| File | References |
+|------|------------|
+| Documentation-Pro.md | ../../core/ecosystem-documentation.md |
+| Documentation-Pro.md | ../../task/task-docs.md |
+| Both Files | ../Build-Systems/ |
+| Both Files | ../../Code-Quality/Testing-Pro.md |
+
+---
+
+## 7. Documentation Patterns
+
+### 7.1 README Patterns
+
+#### CLI Tool
+
+```markdown
+# project
+
+[![npm](https://img.shields.io/npm/v/project)](https://npmjs.org/package/project)
+
+> One-line CLI description.
+
+## Installation
+```bash
+npm install -g project
+```
+
+## Usage
+```bash
+project [options] <command>
+```
+
+## Options
+| Option | Description |
+|--------|-------------|
+| `--help` | Show help |
+| `--version` | Show version |
+```
+
+#### Library/Package
+
+```markdown
+# @org/package
+
+[![npm](https://img.shields.io/npm/v/@org/package)](https://npmjs.org/package/@org/package)
+
+> Library description.
+
+## Installation
+```bash
+npm install @org/package
+```
+
+## Quick Start
+```js
+import { something } from '@org/package'
+
+const result = something()
+```
+
+## API
+See [API Documentation](docs/api.md)
+```
+
+### 7.2 API Documentation Patterns
+
+| Pattern | Example |
+|---------|---------|
+| **Function** | `/** * Calculates sum * @param a - First number * @param b - Second number * @returns Sum of a and b */` |
+| **Class** | `/** * User model * @property id - User ID * @property name - User name */` |
+| **Type** | `/** * Configuration options */` |
+
+### 7.3 Tutorial Patterns
+
+```markdown
+# Getting Started
+
+## Prerequisites
+- Node.js 18+
+- API key
+
+## Installation
+```bash
+npm install -g project
+```
+
+## Your First Command
+```bash
+project init
+project "Hello, World!"
+```
+
+## Understanding Output
+[Explain what user sees]
+
+## Next Steps
+- [Configuration](configuration.md)
+- [Advanced Usage](advanced.md)
+```
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Documentation Issues
+
+| Problem | Solution |
+|---------|----------|
+| Outdated examples | Regular testing, version tags |
+| Broken links | Automated link checker |
+| Confusing content | User testing, feedback |
+| Missing topics | Content audit |
+
+### 8.2 Documentation Tools
+
+| Tool | Use |
+|------|-----|
+| **Docusaurus** | Documentation website |
+| **MkDocs** | Static site generator |
+| **Sphinx** | Python documentation |
+| **TypeDoc** | TypeScript API docs |
+
+---
+
+## Quick Start
+
+```bash
+# Check documentation
+npm run docs:check
+
+# Generate API docs
+npm run docs:api
+
+# Serve locally
+npm run docs:serve
+
+# Deploy
+npm run docs:deploy
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Documentation is a love letter to your future self.*

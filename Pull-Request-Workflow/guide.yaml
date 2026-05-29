@@ -1,0 +1,295 @@
+# Pull Request Workflow - Usage Guide
+
+> Comprehensive guide for pull request processes in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [PR Workflow Overview](#1-pr-workflow-overview)
+2. [Gate 1: PR Preparation](#2-gate-1-pr-preparation)
+3. [Gate 2: PR Creation](#3-gate-2-pr-creation)
+4. [Gate 3: PR Review](#4-gate-3-pr-review)
+5. [Gate 4: PR Merge](#5-gate-4-pr-merge)
+6. [File References](#6-file-references)
+7. [Best Practices](#7-best-practices)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. PR Workflow Overview
+
+Pull request workflow is the collaborative process of proposing, reviewing, and integrating changes into open source projects.
+
+### The Two Core Files
+
+| File | Purpose | Lines |
+|------|---------|-------|
+| PR-Reveiwer-Pro.md | PR review process and feedback | 1588 |
+| PR-Merger-Pro.md | PR integration and merging | 1500+ |
+
+### The PR Lifecycle
+
+```
+Fork → Branch → Code → Test → PR → Review → Revise → Merge → Release
+```
+
+---
+
+## 2. Gate 1: PR Preparation
+
+### 2.1 Pre-PR Checklist
+
+Before creating a PR:
+
+- [ ] Branch created from latest main
+- [ ] Changes are minimal and focused
+- [ ] Tests added/updated
+- [ ] Documentation updated
+- [ ] Lint checks pass
+- [ ] Type checks pass (if applicable)
+- [ ] Self-review completed
+
+### 2.2 PR Sizing Guidelines
+
+| Size | Lines Changed | Files Changed | Review Time |
+|------|---------------|---------------|-------------|
+| XS | < 50 | < 3 | < 15 min |
+| S | 50-150 | 3-5 | 15-30 min |
+| M | 150-400 | 5-10 | 30-60 min |
+| L | 400-800 | 10-20 | 1-2 hours |
+| XL | > 800 | > 20 | Split into multiple PRs |
+
+### 2.3 Preparation Integration
+
+Connects to:
+- **Core-Development-Roles**: Review patterns
+- **Code-Quality**: Testing requirements
+- **Build-Systems**: Build verification
+
+---
+
+## 3. Gate 2: PR Creation
+
+### 3.1 PR Title Format
+
+Use conventional commits format:
+
+```
+type(scope): description
+
+Examples:
+feat(auth): add OAuth2 support
+fix(api): handle null response
+docs(readme): update installation guide
+refactor(utils): simplify helper functions
+test(api): add integration tests
+```
+
+### 3.2 PR Description Template
+
+```markdown
+## Description
+Brief description of changes.
+
+## Related Issue
+Fixes #123
+
+## Changes
+- Change 1
+- Change 2
+
+## Testing
+- [ ] Unit tests added
+- [ ] Integration tests added
+- [ ] Manual testing completed
+
+## Checklist
+- [ ] Code reviewed
+- [ ] Tests pass
+- [ ] Documentation updated
+```
+
+### 3.3 Labels and Milestones
+
+| Label | Purpose |
+|-------|---------|
+| bug | Bug fix PR |
+| feature | New feature PR |
+| docs | Documentation PR |
+| draft | WIP, not ready for review |
+| ready | Ready for review |
+
+---
+
+## 4. Gate 3: PR Review
+
+### 4.1 Review Process
+
+```
+1. Initial Review
+   ├─ Check PR description
+   ├─ Verify tests exist
+   └─ Check code quality
+
+2. Detailed Review
+   ├─ Review each file
+   ├─ Check patterns
+   └─ Verify correctness
+
+3. Feedback
+   ├─ Request changes
+   ├─ Suggest improvements
+   └─ Approve or reject
+```
+
+### 4.2 Review Checklist
+
+Reviewer checklist:
+
+- [ ] PR description is clear
+- [ ] Changes are minimal
+- [ ] Tests are adequate
+- [ ] Code follows patterns
+- [ ] No security issues
+- [ ] Documentation updated
+- [ ] No breaking changes
+
+### 4.3 Review Integration
+
+Connects to:
+- **Code-Quality**: Security and testing checks
+- **Core-Development-Roles**: Review communication
+- **Issue-Management**: Issue reference verification
+
+---
+
+## 5. Gate 4: PR Merge
+
+### 5.1 Merge Criteria
+
+A PR can be merged when:
+
+- [ ] All reviews approved
+- [ ] All CI checks pass
+- [ ] No unresolved conversations
+- [ ] PR description complete
+- [ ] Issue linked (if applicable)
+
+### 5.2 Merge Strategies
+
+| Strategy | Use Case |
+|----------|----------|
+| **Squash** | Combine commits for clean history |
+| **Rebase** | Maintain linear history |
+| **Merge commit** | Preserve exact commit history |
+
+### 5.3 Post-Merge Actions
+
+After merging:
+
+1. Delete feature branch
+2. Monitor CI/CD for issues
+3. Update project board
+4. Close related issues
+5. Notify team
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| PR-Reveiwer-Pro.md | 1588 | PR review process |
+| PR-Merger-Pro.md | 1500+ | PR integration |
+| guide.yaml | This file | Usage guide |
+
+### 6.2 Integration Points
+
+| File | References |
+|------|------------|
+| PR-Reveiwer-Pro.md | ../../core/review-response.md |
+| PR-Merger-Pro.md | ../../core/guide.md |
+| Both Files | ../../Code-Quality/CI-CD-Pro.md |
+| Both Files | ../../Issue-Management/ |
+
+---
+
+## 7. Best Practices
+
+### 7.1 Reviewer Best Practices
+
+- Review within 24-48 hours
+- Be constructive and respectful
+- Focus on code, not people
+- Ask clarifying questions
+- Approve when ready
+
+### 7.2 Author Best Practices
+
+- Keep PRs small
+- Write clear descriptions
+- Respond to feedback quickly
+- Make requested changes
+- Thank reviewers
+
+### 7.3 Team Best Practices
+
+- Set review expectations
+- Use PR templates
+- Automate checks
+- Track review times
+- Celebrate merges
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common PR Issues
+
+| Problem | Solution |
+|---------|----------|
+| Stale PR | Ping reviewer, add "ready" label |
+| CI failure | Fix issues, check logs |
+| Merge conflict | Rebase on main, resolve conflicts |
+| Unclear feedback | Ask for clarification |
+
+### 8.2 Communication Templates
+
+```markdown
+# Requesting Review
+@username could you please review this PR?
+
+# Addressing Feedback
+I've addressed your comments. Thanks for the suggestions!
+
+# Bumping for Review
+This PR is ready for review. It fixes #[issue-number].
+```
+
+---
+
+## Quick Start
+
+```bash
+# Create PR branch
+git checkout -b feature/my-feature
+git push -u origin feature/my-feature
+
+# Create PR
+gh pr create --title "feat: description" --body "details"
+
+# Review PR
+gh pr view 123 --web
+
+# Merge PR
+gh pr merge 123 --squash --auto
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Great PRs lead to great software.*

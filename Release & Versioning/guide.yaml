@@ -1,0 +1,292 @@
+# Release & Versioning - Usage Guide
+
+> Comprehensive guide for release management and versioning in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Release & Versioning Overview](#1-release--versioning-overview)
+2. [Gate 1: Version Planning](#2-gate-1-version-planning)
+3. [Gate 2: Release Preparation](#3-gate-2-release-preparation)
+4. [Gate 3: Release Execution](#4-gate-3-release-execution)
+5. [Gate 4: Release Validation](#5-gate-4-release-validation)
+6. [File References](#6-file-references)
+7. [Versioning Patterns](#7-versioning-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Release & Versioning Overview
+
+Release and versioning are critical for managing software evolution and user expectations.
+
+### The Three Core Files
+
+| File | Purpose | Lines |
+|------|---------|-------|
+| Versioning-Pro.md | Semantic versioning patterns | 1554 |
+| Release-Manager-Pro.md | Release coordination | 1468 |
+| Multi-branch-handling-Pro.md | Git workflow management | 1552 |
+
+### The Release Lifecycle
+
+```
+PLAN → PREPARE → BUILD → TEST → PUBLISH → ANNOUNCE → DOCUMENT
+```
+
+---
+
+## 2. Gate 1: Version Planning
+
+### 2.1 Semantic Versioning (SemVer)
+
+```
+MAJOR.MINOR.PATCH
+  │     │     │
+  │     │     └─ Patch: Bug fixes, minor changes
+  │     └─────── Minor: New features, backward compatible
+  └───────────── Major: Breaking changes
+```
+
+### 2.2 Version Decision Matrix
+
+| Change Type | Version Bump |
+|-------------|--------------|
+| Bug fix | PATCH (1.0.0 → 1.0.1) |
+| New feature | MINOR (1.0.0 → 1.1.0) |
+| Breaking change | MAJOR (1.0.0 → 2.0.0) |
+| Deprecations | MINOR (with warning) |
+
+### 2.3 Planning Integration
+
+Connects to:
+- **Core-Development-Roles**: Feature planning
+- **Issue-Management**: Issue prioritization
+- **PR-Templates**: Release PR templates
+
+---
+
+## 3. Gate 2: Release Preparation
+
+### 3.1 Pre-Release Checklist
+
+- [ ] All targeted issues resolved
+- [ ] All PRs merged
+- [ ] Tests passing
+- [ ] Documentation updated
+- [ ] Changelog written
+- [ ] Version bumped
+- [ ] Release notes drafted
+
+### 3.2 Branch Management
+
+```bash
+# Create release branch
+git checkout -b release/v1.2.0 main
+
+# Update version
+# Python: poetry version minor
+# JavaScript: npm version minor
+# Shell: manual update
+
+# Tag release
+git tag -a v1.2.0 -m "Release v1.2.0"
+```
+
+### 3.3 Preparation Integration
+
+Connects to:
+- **Build-Systems**: Build verification
+- **Code-Quality**: Testing requirements
+- **Documentation**: Docs update
+
+---
+
+## 4. Gate 3: Release Execution
+
+### 4.1 Release Steps
+
+1. **Final Testing**
+   - Run full test suite
+   - Manual verification
+   - Security scan
+
+2. **Create Release**
+   ```bash
+   # Python
+   poetry build
+   poetry publish
+   
+   # JavaScript
+   npm run build
+   npm publish
+   
+   # Git
+   git push --tags
+   ```
+
+3. **Create GitHub Release**
+   ```bash
+   gh release create v1.2.0 \
+     --title "v1.2.0" \
+     --notes "Release notes here"
+   ```
+
+### 4.2 Multi-Platform Publishing
+
+| Platform | Command |
+|----------|---------|
+| npm | `npm publish` |
+| PyPI | `poetry publish` |
+| GitHub | `gh release create` |
+| Docker | `docker push` |
+
+---
+
+## 5. Gate 4: Release Validation
+
+### 5.1 Post-Release Checklist
+
+- [ ] Package published successfully
+- [ ] Installation works
+- [ ] Basic functionality verified
+- [ ] Release notes published
+- [ ] Social media announced
+- [ ] Issue tracker updated
+
+### 5.2 Monitoring
+
+Monitor after release:
+
+| Metric | Tool |
+|--------|------|
+| Downloads | npm stats, PyPI stats |
+| Errors | Sentry, Bugsnag |
+| Feedback | GitHub issues, social media |
+| Performance | CI/CD, APM tools |
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| Versioning-Pro.md | 1554 | Semantic versioning |
+| Release-Manager-Pro.md | 1468 | Release coordination |
+| Multi-branch-handling-Pro.md | 1552 | Branch management |
+
+### 6.2 Integration Points
+
+| File | References |
+|------|------------|
+| Versioning-Pro.md | ../Build-Systems/ |
+| Release-Manager-Pro.md | ../Code-Quality/CI-CD-Pro.md |
+| Multi-branch-handling-Pro.md | ../../core/guide.md |
+
+---
+
+## 7. Versioning Patterns
+
+### 7.1 Version File Patterns
+
+#### Python (pyproject.toml)
+
+```toml
+[tool.poetry]
+version = "1.2.0"
+```
+
+#### JavaScript (package.json)
+
+```json
+{
+  "version": "1.2.0"
+}
+```
+
+#### Shell (version.txt)
+
+```
+1.2.0
+```
+
+### 7.2 Release Branch Patterns
+
+| Pattern | Use Case |
+|---------|----------|
+| `main` | Production releases |
+| `dev` | Development branch |
+| `release/vX.Y.Z` | Release preparation |
+| `feature/name` | New features |
+| `hotfix/name` | Emergency fixes |
+
+### 7.3 Changelog Patterns
+
+```markdown
+# Changelog
+
+## [1.2.0] - 2024-01-15
+
+### Added
+- New feature X
+- New feature Y
+
+### Changed
+- Improved performance
+
+### Fixed
+- Bug in module Z
+```
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Release Issues
+
+| Problem | Solution |
+|---------|----------|
+| Package not published | Check permissions, npm login |
+| Version already exists | Bump version, use patch |
+| Tests failing on main | Rebase, fix conflicts |
+| Tag already exists | Delete tag, recreate |
+
+### 8.2 Rollback Procedures
+
+```bash
+# Unpublish npm package (72h window)
+npm unpublish package-name
+
+# Delete PyPI version
+# Contact PyPI support
+
+# Delete GitHub release
+gh release delete v1.2.0
+```
+
+---
+
+## Quick Start
+
+```bash
+# Version bump (minor)
+npm version minor
+# or
+poetry version minor
+
+# Build and publish
+npm run build
+npm publish
+
+# Create release
+gh release create v1.2.0 --generate-notes
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Releases should be predictable, reliable, and well-documented.*

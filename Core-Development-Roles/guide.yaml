@@ -1,0 +1,367 @@
+# Core Development Roles - Usage Guide
+
+> Comprehensive guide for core development roles in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Role Overview](#1-role-overview)
+2. [Gate 1: Role Selection](#2-gate-1-role-selection)
+3. [Gate 2: Environment Preparation](#3-gate-2-environment-preparation)
+4. [Gate 3: Prompt Application](#4-gate-3-prompt-application)
+5. [Gate 4: Role Execution](#5-gate-4-role-execution)
+6. [Reference Files](#6-reference-files)
+7. [Integration Patterns](#7-integration-patterns)
+8. [Success Metrics](#8-success-metrics)
+
+---
+
+## 1. Role Overview
+
+The Core Development Roles folder contains system prompts for fundamental OSS development activities. Each prompt transforms your AI assistant into a specialized expert with deep domain knowledge.
+
+### The Four Pillars of Core Development
+
+| Role | Purpose | Key Responsibilities |
+|------|---------|---------------------|
+| **Architect** | System design expert | Architecture decisions, technical planning, design patterns |
+| **Contributor** | Code contribution specialist | Implementation, testing, documentation, issue resolution |
+| **Reviewer** | Quality assurance expert | Code review, feedback, style enforcement, quality gates |
+| **Maintainer** | Project leadership expert | Release management, governance, community, roadmap |
+
+### When to Use Each Role
+
+- **Architect-Pro.md**: Before major feature development, system redesign, or technical decision-making
+- **Contributor-Pro.md**: When implementing features, fixing bugs, or adding new functionality
+- **Reveiwer-Pro.md**: During code review processes, quality checks, or pre-merge validation
+- **Maintainer-Pro.md**: For release coordination, governance decisions, or community management
+
+---
+
+## 2. Gate 1: Role Selection
+
+### 2.1 Decision Matrix
+
+Use this matrix to select the appropriate role for your task:
+
+| Task Type | Primary Role | Secondary Roles |
+|-----------|--------------|-----------------|
+| New feature design | Architect | Contributor, Reviewer |
+| Code implementation | Contributor | Reviewer |
+| Bug fix | Contributor | Reviewer |
+| Code review | Reviewer | Maintainer |
+| Release planning | Maintainer | Architect |
+| Community management | Maintainer | Contributor |
+| Technical documentation | Contributor | Architect |
+
+### 2.2 Role Prerequisites
+
+Before using any role prompt, ensure you understand:
+
+1. **Project context**: Read the main README and CONTRIBUTING files
+2. **Existing patterns**: Study similar code in the repository
+3. **Tooling setup**: Ensure required tools are installed and configured
+4. **Branch strategy**: Understand the project's branching model
+
+### 2.3 Cross-Role Collaboration
+
+Roles often work together in a cycle:
+
+```
+┌─────────────┐    ┌──────────────┐    ┌─────────────┐
+│  Architect  │───▶│ Contributor  │───▶│   Reviewer  │
+└─────────────┘    └──────────────┘    └─────────────┘
+       ▲                                    │
+       │                                    ▼
+       │                              ┌─────────────┐
+       └──────────────────────────────│ Maintainer  │
+                                      └─────────────┘
+```
+
+---
+
+## 3. Gate 2: Environment Preparation
+
+### 3.1 Required Tools by Role
+
+**All Roles:**
+- Git (latest version)
+- Text editor or IDE
+- Terminal/command line
+
+**Contributor & Reviewer:**
+- Language-specific tools (Python, Node.js, etc.)
+- Testing framework
+- Linter/formatter
+
+**Architect & Maintainer:**
+- Diagramming tools (for architecture documentation)
+- Project management tools
+- Release tooling
+
+### 3.2 Repository Setup
+
+```bash
+# Fork and clone
+git clone https://github.com/YOUR_USERNAME/project-name.git
+cd project-name
+
+# Add upstream remote
+git remote add upstream https://github.com/ORIGINAL_OWNER/project-name.git
+
+# Install dependencies
+npm install  # or pip install -r requirements.txt
+
+# Create feature branch
+git checkout -b feature/your-feature-name
+```
+
+### 3.3 Reference Documentation
+
+Before proceeding, read these essential files:
+
+1. **Main README**: [../../README.md](../../README.md)
+2. **Contributing Guide**: [../../Contributing.md](../../Contributing.md)
+3. **Core Knowledge Base**: [../core/README.md](../core/README.md)
+4. **Project-specific docs**: Check for GOVERNANCE.md, CODE_OF_CONDUCT.md, etc.
+
+---
+
+## 4. Gate 3: Prompt Application
+
+### 4.1 Full Prompt Method
+
+For comprehensive guidance, copy the entire prompt file as your system instructions:
+
+1. Open the role-specific prompt file
+2. Copy all content
+3. Paste as system instructions for your AI assistant
+4. Provide specific task details in your user message
+
+### 4.2 Chapter Extraction Method
+
+For focused tasks, extract relevant chapters:
+
+| Task | Relevant Chapters |
+|------|-------------------|
+| Code review | Code Review Framework, Feedback Templates |
+| Contribution | Contribution Workflow, Code Patterns |
+| Architecture | System Design, Technical Decision Making |
+| Release | Release Coordination, Versioning |
+
+### 4.3 Integration with Core Knowledge Base
+
+Combine role prompts with core knowledge files:
+
+| Role Prompt | Core Files to Reference |
+|-------------|------------------------|
+| Architect-Pro.md | guide.md, patterns.md, ecosystem-tooling.md |
+| Contributor-Pro.md | guide.md, patterns.md, checklist.md |
+| Reveiwer-Pro.md | review-response.md, checklist.md, patterns.md |
+| Maintainer-Pro.md | governance.md, reputation-trust.md, guide.md |
+
+---
+
+## 5. Gate 4: Role Execution
+
+### 5.1 Architect Execution Flow
+
+1. **Problem Analysis**
+   - Understand requirements and constraints
+   - Identify stakeholders and their needs
+   - Research existing solutions and alternatives
+
+2. **Design Phase**
+   - Create architecture diagrams
+   - Define components and interfaces
+   - Document trade-offs and decisions
+
+3. **Validation**
+   - Review with team and stakeholders
+   - Iterate on feedback
+   - Finalize documentation
+
+### 5.2 Contributor Execution Flow
+
+1. **Task Preparation**
+   - Read the issue or requirements
+   - Discuss approach if needed
+   - Understand existing patterns
+
+2. **Implementation**
+   - Write code following project conventions
+   - Add appropriate tests
+   - Update documentation
+
+3. **Self-Review**
+   - Run all checks (lint, test, typecheck)
+   - Review your own diff
+   - Ensure no regressions
+
+### 5.3 Reviewer Execution Flow
+
+1. **Pre-Review Checklist**
+   - Verify PR follows project conventions
+   - Check for obvious issues (typos, formatting)
+   - Ensure PR description is complete
+
+2. **Code Review**
+   - Review logic correctness
+   - Check for security issues
+   - Verify test coverage
+
+3. **Feedback**
+   - Provide clear, actionable feedback
+   - Be respectful and constructive
+   - Approve when ready
+
+### 5.4 Maintainer Execution Flow
+
+1. **Release Planning**
+   - Review roadmap and priorities
+   - Coordinate with contributors
+   - Plan release timeline
+
+2. **Release Execution**
+   - Manage merge process
+   - Create release tags
+   - Publish packages
+
+3. **Community Management**
+   - Respond to issues and PRs
+   - Mentor new contributors
+   - Update governance documents
+
+---
+
+## 6. Reference Files
+
+### 6.1 Current Folder Files
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| architect-Pro.md | 1500+ | System architecture and design guidance |
+| Contributor-Pro.md | 1700+ | Contribution guidelines and patterns |
+| Reveiwer-Pro.md | 1500+ | Code review processes and best practices |
+| Maintainer-Pro.md | 1700+ | Project maintenance and governance |
+| guide.yaml | This file | Step-by-step usage guide |
+
+### 6.2 Essential References
+
+| File | Location | Purpose |
+|------|----------|---------|
+| Main README | ../../README.md | Project overview and quick start |
+| Contributing Guide | ../../Contributing.md | How to contribute to this project |
+| Core Knowledge Base | ../core/README.md | Universal OSS contribution principles |
+| PR Templates | ../../PR-Templates/README.md | Pull request template usage |
+
+### 6.3 Quick Reference Guides
+
+| Guide | Location | Focus |
+|-------|----------|-------|
+| guide.yaml | This file | Role usage workflow |
+| guide.yaml | ../core/ | Universal contribution workflow |
+| github-commands.md | ../../Quick-Reference-Commands/ | CLI reference |
+| branch-workflow.md | ../../Quick-Reference-Commands/ | Git workflow patterns |
+
+---
+
+## 7. Integration Patterns
+
+### 7.1 Role-to-Core Integration
+
+Each role should integrate with the core knowledge base:
+
+```yaml
+# Example integration pattern
+role: Contributor
+core_files:
+  - ../core/guide.md          # Step-by-step workflow
+  - ../core/patterns.md       # Code patterns
+  - ../core/checklist.md      # Pre-submission check
+  - ../core/review-response.md # Communication guide
+```
+
+### 7.2 Multi-Role Collaboration
+
+For complex tasks requiring multiple roles:
+
+1. **Architecture Review**: Architect + Maintainer + Contributor
+2. **Large Feature**: Architect → Contributor → Reviewer → Maintainer
+3. **Bug Fix**: Contributor → Reviewer (Maintainer if security-related)
+
+### 7.3 Cross-Folder References
+
+| Current Role | References |
+|--------------|------------|
+| Architect | Build-Systems, Code-Quality, Language-Specific-Contributors |
+| Contributor | Language-Specific-Contributors, Issue-Management |
+| Reviewer | Code-Quality, Quick-Reference-Commands |
+| Maintainer | Governance-&-Community, Release & Versioning |
+
+---
+
+## 8. Success Metrics
+
+### 8.1 Role-Specific KPIs
+
+| Role | Metric | Target |
+|------|--------|--------|
+| Architect | Design reviews passed | 100% |
+| Contributor | PRs merged | 80% first attempt |
+| Reviewer | Review time | < 24 hours |
+| Maintainer | Release cadence | Predictable schedule |
+
+### 8.2 Quality Gates
+
+Before completing tasks in each role:
+
+- [ ] All checks pass (CI, lint, typecheck)
+- [ ] Documentation updated
+- [ ] Tests included (if applicable)
+- [ ] Reviewed by appropriate role
+- [ ] Follows project conventions
+
+### 8.3 Continuous Improvement
+
+Regularly review and improve:
+
+1. **Process**: Are workflows efficient?
+2. **Documentation**: Is guidance clear and accurate?
+3. **Tools**: Are the right tools being used?
+4. **Outcomes**: Are goals being met?
+
+---
+
+## Quick Start Commands
+
+```bash
+# View available roles
+ls *.md
+
+# Read a specific role prompt
+cat architect-Pro.md
+
+# Check core knowledge base
+cat ../core/README.md
+
+# Run project checks
+npm test && npm run lint && npm run typecheck
+```
+
+---
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Prompt too complex | Extract specific chapters |
+| Missing context | Read reference files first |
+| Role confusion | Consult the decision matrix |
+| Integration issues | Follow the integration patterns |
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework. For questions or contributions, please refer to the main project documentation.*

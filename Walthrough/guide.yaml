@@ -1,0 +1,285 @@
+# Walkthrough - Usage Guide
+
+> Comprehensive guide for project walkthroughs and learning paths.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Walkthrough Overview](#1-walkthrough-overview)
+2. [Gate 1: Path Planning](#2-gate-1-path-planning)
+3. [Gate 2: Content Creation](#3-gate-2-content-creation)
+4. [Gate 3: Path Validation](#4-gate-3-path-validation)
+5. [Gate 4: Path Delivery](#5-gate-4-path-delivery)
+6. [File References](#6-file-references)
+7. [Learning Path Patterns](#7-learning-path-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Walkthrough Overview
+
+Walkthroughs provide guided learning paths for users to understand and adopt projects effectively.
+
+### The Single Core File
+
+| File | Purpose |
+|------|---------|
+| README.md | Walkthrough guide |
+
+### Walkthrough Types
+
+| Type | Purpose | Audience |
+|------|---------|----------|
+| **Getting Started** | First steps with project | New users |
+| **Tutorial Series** | Progressive learning | Beginners |
+| **How-to Guides** | Task-oriented instructions | Users |
+| **Concept Guides** | Deep understanding | Developers |
+| **Reference** | Detailed specifications | Advanced users |
+
+---
+
+## 2. Gate 1: Path Planning
+
+### 2.1 Learning Path Planning
+
+```
+Audience → Goals → Prerequisites → Content → Delivery
+```
+
+### 2.2 Audience Analysis
+
+| Audience | Characteristics | Needs |
+|----------|-----------------|-------|
+| **New Users** | No prior knowledge | Simple, guided steps |
+| **Developers** | Technical background | Code examples, APIs |
+| **Contributors** | Want to help | Contribution process |
+| **Administrators** | Deploy/maintain | Configuration, ops |
+
+### 2.3 Path Planning Integration
+
+Connects to:
+- **Documentation**: Content creation
+- **Task Management**: Learning tasks
+- **PR-Templates**: Tutorial PR templates
+
+---
+
+## 3. Gate 2: Content Creation
+
+### 3.1 Content Structure
+
+```markdown
+# Title
+
+> Brief description.
+
+## Prerequisites
+- Requirement 1
+- Requirement 2
+
+## Step 1: Description
+```bash
+command
+```
+
+## Step 2: Description
+```bash
+command
+```
+
+## Verification
+Expected output or check.
+
+## Next Steps
+- [Link to next topic](next.md)
+- [Link to related topic](related.md)
+```
+
+### 3.2 Content Patterns
+
+| Pattern | Example |
+|---------|---------|
+| **Command** | \`\`\`bash\nnpm install\n\`\`\` |
+| **Code** | \`\`\`js\nconsole.log('hello')\n\`\`\` |
+| **Output** | \`\`\`\nExpected output\n\`\`\` |
+| **Warning** | > ⚠️ Warning: important note |
+| **Tip** | > 💡 Tip: useful suggestion |
+
+### 3.3 Creation Integration
+
+Connects to:
+- **Documentation**: Writing standards
+- **Build-Systems**: Demo projects
+- **Code-Quality**: Example verification
+
+---
+
+## 4. Gate 3: Path Validation
+
+### 4.1 Validation Checklist
+
+- [ ] All commands work as written
+- [ ] No missing steps
+- [ ] Prerequisites listed
+- [ ] Expected outputs match
+- [ ] No broken links
+- [ ] Mobile-friendly formatting
+
+### 4.2 Testing Methods
+
+| Method | Description |
+|--------|-------------|
+| **Manual** | Run through yourself |
+| **User test** | Have newcomer follow |
+| **CI check** | Automated verification |
+| **Link check** | Verify all URLs |
+
+### 4.3 Validation Integration
+
+Connects to:
+- **Code-Quality**: Testing requirements
+- **CI-CD**: Automated validation
+- **Documentation**: Review process
+
+---
+
+## 5. Gate 4: Path Delivery
+
+### 5.1 Delivery Methods
+
+| Method | Use Case |
+|--------|----------|
+| **README** | Main project entry |
+| **docs/** | Dedicated docs folder |
+| **Wiki** | GitHub/GitLab wiki |
+| **Website** | Dedicated site |
+
+### 5.2 Delivery Integration
+
+| Platform | Integration |
+|----------|-------------|
+| **GitHub** | README, wiki, discussions |
+| **GitLab** | README, docs, issues |
+| **npm** | package.json readme field |
+| **PyPI** | README in package |
+
+### 5.3 Maintenance
+
+Keep walkthroughs current:
+- Update with new releases
+- Fix broken commands
+- Improve based on feedback
+- Add new paths for new features
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Purpose |
+|------|---------|
+| README.md | Walkthrough guide |
+
+### 6.2 Integration Points
+
+| File | References |
+|------|------------|
+| README.md | ../Documentation/ |
+| README.md | ../task/task-docs.md |
+| README.md | ../../PR-Templates/ |
+
+---
+
+## 7. Learning Path Patterns
+
+### 7.1 Path Types
+
+| Path | Structure |
+|------|-----------|
+| **Hello World** | Install → Run first example |
+| **Feature Deep Dive** | Concept → Examples → Advanced |
+| **Migration Guide** | Old way → New way → Migration steps |
+| **Problem/Solution** | Problem → Analysis → Solution |
+
+### 7.2 Path Structure
+
+```markdown
+# Path Title
+
+## Overview
+Brief description of what you'll learn.
+
+## Before You Begin
+Prerequisites and setup.
+
+## Steps
+1. Step one
+2. Step two
+3. Step three
+
+## Troubleshooting
+Common issues and solutions.
+
+## Summary
+What you learned.
+```
+
+### 7.3 Path Integration
+
+| Current Path | Integrates With |
+|--------------|-----------------|
+| Getting Started | README, Installation docs |
+| Tutorials | API docs, Examples |
+| How-to Guides | Feature docs |
+| Reference | API specs |
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Walkthrough Issues
+
+| Problem | Solution |
+|---------|----------|
+| Commands don't work | Verify environment, versions |
+| Missing steps | Add detailed prerequisites |
+| Confusing text | Simplify language, add examples |
+| Broken links | Fix URLs, update references |
+
+### 8.2 Feedback Loop
+
+```bash
+# Collect feedback
+gh issue create --title "Walkthrough feedback" --body "What was confusing?"
+
+# Update based on feedback
+# 1. Read feedback
+# 2. Identify issues
+# 3. Make improvements
+# 4. Verify fixes
+```
+
+---
+
+## Quick Start
+
+```bash
+# Create walkthrough
+mkdir docs/walkthroughs
+touch docs/walkthroughs/getting-started.md
+
+# Test walkthrough
+./scripts/verify-walkthrough.sh
+
+# Deploy
+git add docs/walkthroughs/
+git commit -m "docs: add getting started walkthrough"
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Good walkthroughs make adoption effortless.*

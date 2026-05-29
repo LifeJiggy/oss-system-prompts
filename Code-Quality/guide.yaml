@@ -1,0 +1,393 @@
+# Code Quality - Usage Guide
+
+> Comprehensive guide for code quality assurance in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Code Quality Overview](#1-code-quality-overview)
+2. [Gate 1: Quality Requirements](#2-gate-1-quality-requirements)
+3. [Gate 2: Testing Strategy](#3-gate-2-testing-strategy)
+4. [Gate 3: Security Auditing](#4-gate-3-security-auditing)
+5. [Gate 4: CI/CD Integration](#5-gate-4-cicd-integration)
+6. [File References](#6-file-references)
+7. [Quality Metrics](#7-quality-metrics)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Code Quality Overview
+
+Code quality is the foundation of maintainable, reliable, and secure open source software. This folder provides expert guidance for testing, security auditing, CI/CD, and dependency management.
+
+### The Four Dimensions of Code Quality
+
+| Dimension | Description | Tools |
+|-----------|-------------|-------|
+| **Testing** | Ensuring correctness through automated tests | pytest, Jest, Vitest, etc. |
+| **Security** | Identifying and mitigating vulnerabilities | Snyk, npm audit, safety |
+| **CI/CD** | Automating quality checks in pipelines | GitHub Actions, GitLab CI |
+| **Dependencies** | Managing third-party packages safely | Dependabot, Poetry, npm |
+
+### When to Use Each Quality File
+
+- **Testing-Pro.md**: When implementing or improving test coverage
+- **Security-Audit-Pro.md**: When conducting security reviews or vulnerability assessments
+- **CI-CD-Pro.md**: When setting up or improving CI/CD pipelines
+- **Dependency-Pro.md**: When managing dependencies or auditing supply chain
+
+---
+
+## 2. Gate 1: Quality Requirements
+
+### 2.1 Quality Standards Matrix
+
+| Standard | Minimum | Recommended | Target |
+|----------|---------|-------------|--------|
+| Test Coverage | 50% | 80% | 95%+ |
+| Security Audit | Annual | Quarterly | Monthly |
+| CI Pipeline | Basic lint | Full test suite | Parallel execution |
+| Dependency Updates | Manual | Automated PRs | Real-time monitoring |
+
+### 2.2 Quality Gate Checklist
+
+Before any code can be merged:
+
+- [ ] Tests pass (unit, integration, E2E)
+- [ ] Coverage meets minimum threshold
+- [ ] Lint checks pass
+- [ ] Type checks pass (if applicable)
+- [ ] Security scan passes
+- [ ] No new dependencies without approval
+- [ ] Documentation updated
+
+### 2.3 Integration with Build Systems
+
+Code quality tools integrate with build systems:
+
+| Build System | Quality Integration |
+|--------------|---------------------|
+| Python (Poetry) | `poetry run pytest && poetry run mypy` |
+| JavaScript (Vite) | `npm run test && npm run lint && npm run typecheck` |
+| Shell (Make) | `make test && make lint` |
+
+---
+
+## 3. Gate 2: Testing Strategy
+
+### 3.1 Testing Pyramid
+
+```
+        ┌─────────────────────┐
+        │   E2E Tests (5%)    │  End-to-end user flows
+        └─────────────────────┘
+        ┌─────────────────────┐
+       │ Integration Tests   │  Component interactions
+       │      (15%)          │
+       └─────────────────────┘
+┌───────────────────────────────┐
+│        Unit Tests             │  Individual functions/modules
+│           (80%)               │
+└───────────────────────────────┘
+```
+
+### 3.2 Test Types and Frameworks
+
+| Test Type | Purpose | Tools |
+|-----------|---------|-------|
+| Unit | Test individual functions | pytest, Jest, Vitest |
+| Integration | Test component interactions | Supertest, React Testing Library |
+| E2E | Test complete user flows | Cypress, Playwright |
+| Property-based | Test with generated inputs | Hypothesis, fast-check |
+| Mutation | Test test quality | Stryker, Cosmic-Ray |
+
+### 3.3 Testing Patterns
+
+#### Python Testing Pattern
+
+```python
+import pytest
+from mymodule import process_data
+
+def test_process_data_success():
+    """Test successful data processing."""
+    result = process_data({"key": "value"})
+    assert result["status"] == "success"
+
+def test_process_data_empty():
+    """Test handling of empty input."""
+    result = process_data({})
+    assert result["status"] == "empty"
+
+@pytest.mark.parametrize("input,expected", [
+    ({"valid": True}, "success"),
+    ({}, "empty"),
+])
+def test_parametrized(input, expected):
+    assert process_data(input)["status"] == expected
+```
+
+#### JavaScript Testing Pattern
+
+```javascript
+import { process_data } from './process_data';
+
+describe('process_data', () => {
+  test('handles valid input', () => {
+    const result = process_data({ key: 'value' });
+    expect(result.status).toBe('success');
+  });
+
+  test('handles empty input', () => {
+    const result = process_data({});
+    expect(result.status).toBe('empty');
+  });
+});
+```
+
+### 3.4 Test Execution Strategy
+
+```yaml
+# CI Pipeline Example
+test:
+  stage: test
+  script:
+    - pytest tests/ --cov=src --cov-report=xml
+    - npm run test:unit
+    - npm run test:integration
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  after_script:
+    - bash <(curl -s https://codecov.io/bash)
+```
+
+---
+
+## 4. Gate 3: Security Auditing
+
+### 4.1 Security Audit Checklist
+
+| Category | Items to Check |
+|----------|---------------|
+| **Dependencies** | Outdated packages, known vulnerabilities |
+| **Code** | Injection vulnerabilities, auth issues |
+| **Configuration** | Exposed secrets, insecure defaults |
+| **Infrastructure** | Permissions, network exposure |
+
+### 4.2 Security Tools by Language
+
+#### Python Security Tools
+
+```bash
+# Check for known vulnerabilities
+pip install safety
+safety check
+
+# Check for insecure code patterns
+pip install bandit
+bandit -r src/
+
+# Check for outdated dependencies
+pip list --outdated
+```
+
+#### JavaScript Security Tools
+
+```bash
+# Audit dependencies
+npm audit
+npm audit fix
+
+# Check for vulnerabilities
+npx audit-ci --high
+
+# SAST scanning
+npx eslint-plugin-security
+```
+
+### 4.3 Security Patterns
+
+| Vulnerability | Detection | Prevention |
+|---------------|-----------|------------|
+| SQL Injection | Input validation | Parameterized queries |
+| XSS | Output encoding | Sanitize user input |
+| Command Injection | Input validation | Avoid shell execution |
+| Path Traversal | Path validation | Use safe path methods |
+
+---
+
+## 5. Gate 4: CI/CD Integration
+
+### 5.1 CI/CD Quality Pipeline
+
+```yaml
+name: Quality Checks
+on: [push, pull_request]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup environment
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run linting
+        run: flake8 src/
+      
+      - name: Run tests
+        run: pytest --cov=src/
+      
+      - name: Run security scan
+        run: bandit -r src/
+      
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+```
+
+### 5.2 Quality Reporting
+
+Generate quality reports:
+
+| Report | Tool | Output |
+|--------|------|--------|
+| Coverage | pytest-cov | HTML/XML report |
+| Security | bandit/snyk | JSON/HTML report |
+| Linting | flake8/eslint | Checkstyle XML |
+| Duplication | jscpd | JSON report |
+
+### 5.3 Quality Gates in CI
+
+Fail builds on quality issues:
+
+```yaml
+- name: Enforce coverage minimum
+  run: |
+    coverage=$(pytest --cov=src/ --cov-report=term | grep TOTAL | awk '{print $4}' | tr -d '%')
+    if [ "$coverage" -lt 80 ]; then
+      echo "Coverage $coverage% below minimum 80%"
+      exit 1
+    fi
+```
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| Testing-Pro.md | 1927 | Testing strategies and frameworks |
+| Security-Audit-Pro.md | 1560 | Vulnerability detection |
+| CI-CD-Pro.md | 1791 | Pipeline automation |
+| Dependency-Pro.md | 2095 | Package management |
+| guide.yaml | This file | Usage guide |
+
+### 6.2 Integration with Other Folders
+
+| Current File | References |
+|--------------|------------|
+| Testing-Pro.md | ../Language-Specific-Contributors/ |
+| Security-Audit-Pro.md | ../Code-Quality/Dependency-Pro.md |
+| CI-CD-Pro.md | ../PR-Templates/ |
+| Dependency-Pro.md | ../../core/ecosystem-security-supply-chain.md |
+
+### 6.3 Quick Reference Links
+
+| Resource | Location |
+|----------|----------|
+| Core guide | ../core/guide.md |
+| Core checklist | ../core/checklist.md |
+| Build systems | ../Build-Systems/ |
+| PR templates | ../../PR-Templates/ |
+
+---
+
+## 7. Quality Metrics
+
+### 7.1 Test Metrics
+
+| Metric | Definition | Target |
+|--------|------------|--------|
+| Coverage | % of code executed | >80% |
+| Mutation Score | % of mutations killed | >80% |
+| Test Time | Total execution time | <10 min |
+| Flaky Tests | Tests that fail intermittently | 0 |
+
+### 7.2 Security Metrics
+
+| Metric | Definition | Target |
+|--------|------------|--------|
+| Vulnerabilities | High/Critical issues | 0 |
+| Outdated deps | Packages behind latest | <5% |
+| Secrets exposed | Hardcoded credentials | 0 |
+| SAST findings | Static analysis issues | <10 |
+
+### 7.3 CI/CD Metrics
+
+| Metric | Definition | Target |
+|--------|------------|--------|
+| Build time | Total pipeline duration | <15 min |
+| Success rate | Successful builds | >95% |
+| Deployment frequency | How often deployed | Daily/Weekly |
+| MTTR | Mean time to recovery | <1 hour |
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Test Issues
+
+| Problem | Solution |
+|---------|----------|
+| Test timeout | Increase timeout, check async code |
+| Flaky test | Use unique test IDs, avoid shared state |
+| Coverage gap | Add tests for missing branches |
+| Mock issues | Reset mocks between tests |
+
+### 8.2 Security Troubleshooting
+
+| Issue | Resolution |
+|-------|------------|
+| Vulnerability found | Update dependency, apply patch |
+| False positive | Configure tool, suppress with reason |
+| Secret leak | Rotate key, use env variables |
+| Dependency conflict | Pin versions, use lockfile |
+
+### 8.3 CI/CD Troubleshooting
+
+| Error | Fix |
+|-------|-----|
+| Build fails | Check logs, fix configuration |
+| Test timeout | Increase resources, optimize tests |
+| Cache miss | Fix cache key, restore cache |
+| Deployment error | Check permissions, review config |
+
+---
+
+## Quick Start Commands
+
+```bash
+# Python testing
+pytest tests/ --cov=src/ --cov-report=html
+
+# JavaScript testing
+npm run test -- --coverage
+
+# Security audit
+safety check
+npm audit
+
+# CI pipeline
+act  # Run GitHub Actions locally
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Quality is not a destination but a continuous journey of improvement.*

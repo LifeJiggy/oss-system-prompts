@@ -1,0 +1,304 @@
+# Issue Management - Usage Guide
+
+> Comprehensive guide for issue finding, fixing, and management in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Issue Management Overview](#1-issue-management-overview)
+2. [Gate 1: Issue Discovery](#2-gate-1-issue-discovery)
+3. [Gate 2: Issue Triage](#3-gate-2-issue-triage)
+4. [Gate 3: Issue Resolution](#4-gate-3-issue-resolution)
+5. [Gate 4: Issue Documentation](#5-gate-4-issue-documentation)
+6. [File References](#6-file-references)
+7. [Workflow Patterns](#7-workflow-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Issue Management Overview
+
+Issue management is the backbone of effective open source development. This folder provides guidance for finding, triaging, and resolving issues.
+
+### The Two Core Files
+
+| File | Purpose | Lines |
+|------|---------|-------|
+| Issue-finder-Pro.md | Bug discovery and triage | 1513 |
+| Issue-fixer-Pro.md | Debugging and fixing strategies | 1582 |
+
+### The Issue Lifecycle
+
+```
+DISCOVER → TRIAGE → PRIORITIZE → ASSIGN → RESOLVE → VERIFY → CLOSE
+```
+
+---
+
+## 2. Gate 1: Issue Discovery
+
+### 2.1 Discovery Methods
+
+| Method | Description | Tools |
+|--------|-------------|-------|
+| **Code Review** | Find issues in existing code | GitHub, GitLab |
+| **Testing** | Discover failures in tests | pytest, Jest |
+| **User Reports** | Issues reported by users | Issue trackers |
+| **Static Analysis** | Automated issue detection | linters, SAST |
+| **Security Scan** | Vulnerability discovery | Snyk, npm audit |
+
+### 2.2 Issue Discovery Checklist
+
+- [ ] Run automated tests
+- [ ] Check CI/CD failure logs
+- [ ] Review code for anti-patterns
+- [ ] Scan for security vulnerabilities
+- [ ] Monitor user feedback
+- [ ] Review dependency updates
+
+### 2.3 Discovery Integration
+
+Connects to:
+- **Core-Development-Roles**: Issue-finding patterns
+- **Code-Quality**: Testing and security tools
+- **Build-Systems**: Build failure detection
+
+---
+
+## 3. Gate 2: Issue Triage
+
+### 3.1 Triage Process
+
+```
+1. Reproduce
+   ├─ Verify issue exists
+   ├─ Document steps
+   └─ Identify environment
+
+2. Categorize
+   ├─ Bug / Feature / Task
+   ├─ Severity (P0-P3)
+   └─ Priority (High/Medium/Low)
+
+3. Assign
+   ├─ Find responsible person
+   ├─ Set milestone
+   └─ Add labels
+```
+
+### 3.2 Severity Classification
+
+| Severity | Criteria | Response Time |
+|----------|----------|---------------|
+| P0 | Critical bug, security issue | Immediate |
+| P1 | High impact, blocks users | 24 hours |
+| P2 | Medium impact, workaround exists | 72 hours |
+| P3 | Low impact, edge case | 1 week |
+
+### 3.3 Priority Labels
+
+| Label | Meaning |
+|-------|---------|
+| good first issue | New contributor friendly |
+| help wanted | Needs community attention |
+| bug | Something is broken |
+| enhancement | New feature request |
+| documentation | Docs need updating |
+
+---
+
+## 4. Gate 3: Issue Resolution
+
+### 4.1 Resolution Strategies
+
+| Strategy | Use Case |
+|----------|----------|
+| **Fix** | Bug can be corrected |
+| **Workaround** | Provide temporary solution |
+| **Won't Fix** | Invalid or low priority |
+| **Duplicate** | Already reported |
+| **Question** | Needs clarification |
+
+### 4.2 Fixing Process
+
+1. **Create branch** from latest main
+2. **Implement fix** following project patterns
+3. **Add tests** for the fix
+4. **Run quality checks** (lint, test, typecheck)
+5. **Update documentation** if needed
+6. **Submit PR** with issue reference
+
+### 4.3 Resolution Checklist
+
+- [ ] Root cause identified
+- [ ] Fix implemented
+- [ ] Tests added
+- [ ] Documentation updated
+- [ ] PR submitted
+- [ ] Issue linked to PR
+
+---
+
+## 5. Gate 4: Issue Documentation
+
+### 5.1 Issue Template
+
+```markdown
+## Description
+Clear description of the issue.
+
+## Steps to Reproduce
+1. Step one
+2. Step two
+3. Expected vs actual result
+
+## Environment
+- OS: [e.g., macOS, Windows]
+- Version: [e.g., 1.0.0]
+- Browser: [if applicable]
+
+## Additional Context
+Any other information about the issue.
+```
+
+### 5.2 Resolution Documentation
+
+When closing issues:
+
+```markdown
+## Resolution
+Fixed in PR #1234.
+
+## Changes Made
+- Added null check for input
+- Added test case
+- Updated error message
+
+## Verification
+Tested on [platform] with [version].
+```
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| Issue-finder-Pro.md | 1513 | Bug discovery and triage |
+| Issue-fixer-Pro.md | 1582 | Debugging and fixing strategies |
+| guide.yaml | This file | Usage guide |
+
+### 6.2 Integration Points
+
+| File | References |
+|------|------------|
+| Issue-finder-Pro.md | ../../core/guide.md |
+| Issue-fixer-Pro.md | ../../core/checklist.md |
+| Both Files | ../../Code-Quality/Testing-Pro.md |
+| Both Files | ../../Core-Development-Roles/Contributor-Pro.md |
+
+---
+
+## 7. Workflow Patterns
+
+### 7.1 Issue-to-PR Workflow
+
+```
+Issue Created
+      ↓
+Triage (P0-P3)
+      ↓
+Assigned to Contributor
+      ↓
+Branch Created (fix/issue-name)
+      ↓
+Fix Implemented + Tests
+      ↓
+PR Submitted
+      ↓
+Review + CI Checks
+      ↓
+Merge + Close Issue
+```
+
+### 7.2 Triage Meeting Pattern
+
+Weekly triage meeting agenda:
+
+1. **New Issues** (15 min)
+   - Review new reports
+   - Assign severity
+
+2. **Stale Issues** (10 min)
+   - Check progress
+   - Update status
+
+3. **Prioritization** (10 min)
+   - Order by priority
+   - Plan next sprint
+
+### 7.3 Automation Patterns
+
+```yaml
+# GitHub Actions for issue management
+name: Issue Triage
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            // Auto-label based on content
+```
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Issue Problems
+
+| Problem | Solution |
+|---------|----------|
+| Unreproducible | Add more context, environment details |
+| Vague description | Request specific steps, screenshots |
+| Duplicate | Search existing issues, link to original |
+| Stale | Comment asking for update, close if no response |
+
+### 8.2 Communication Patterns
+
+| Situation | Response |
+|-----------|----------|
+| Need more info | "Can you provide [specific info]?" |
+| Already fixed | "This is fixed in [version/PR]" |
+| Won't fix | "We're not planning to [reason]" |
+| Duplicate | "See [link] for details" |
+
+---
+
+## Quick Start
+
+```bash
+# Find issues
+gh issue list --state open
+gh issue list --label "good first issue"
+
+# Create issue
+gh issue create --title "Bug: description" --body "steps to reproduce..."
+
+# Link PR to issue
+gh pr create --title "Fix: description" --body "Closes #123"
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Good issues lead to good fixes and better software.*

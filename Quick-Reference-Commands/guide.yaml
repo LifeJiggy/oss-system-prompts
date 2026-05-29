@@ -1,0 +1,319 @@
+# Quick Reference Commands - Usage Guide
+
+> Comprehensive guide for quick reference commands in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Quick Reference Overview](#1-quick-reference-overview)
+2. [Gate 1: Command Discovery](#2-gate-1-command-discovery)
+3. [Gate 2: Command Setup](#3-gate-2-command-setup)
+4. [Gate 3: Command Usage](#4-gate-3-command-usage)
+5. [Gate 4: Command Customization](#5-gate-4-command-customization)
+6. [File References](#6-file-references)
+7. [Command Patterns](#7-command-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Quick Reference Overview
+
+This folder provides quick reference guides for GitHub CLI commands and Git branch workflows.
+
+### The Two Core Files
+
+| File | Purpose |
+|------|---------|
+| github-commands.md | GitHub CLI command reference |
+| branch-workflow.md | Git branch workflow patterns |
+
+### Command Categories
+
+| Category | Tools | Purpose |
+|----------|-------|---------|
+| **Repository** | gh, git | Repo management |
+| **Issues** | gh issue | Issue tracking |
+| **PRs** | gh pr | Pull requests |
+| **Actions** | gh workflow | CI/CD |
+| **Branches** | git branch | Branch management |
+
+---
+
+## 2. Gate 1: Command Discovery
+
+### 2.1 Discovery Methods
+
+| Method | Description | Example |
+|--------|-------------|---------|
+| **Help flags** | Built-in help | `gh pr create --help` |
+| **Man pages** | Detailed documentation | `man git-branch` |
+| **Online docs** | GitHub documentation | docs.github.com |
+| **Examples** | Practical usage | `gh pr create --example` |
+
+### 2.2 Essential Commands
+
+| Command | Purpose |
+|---------|---------|
+| `gh repo clone` | Clone repository |
+| `gh issue create` | Create issue |
+| `gh pr create` | Create pull request |
+| `gh workflow run` | Run workflow |
+| `git branch` | List branches |
+| `git checkout` | Switch branches |
+
+---
+
+## 3. Gate 2: Command Setup
+
+### 3.1 GitHub CLI Setup
+
+```bash
+# Install GitHub CLI
+# macOS
+brew install gh
+
+# Windows
+winget install GitHub.cli
+
+# Linux (Debian/Ubuntu)
+sudo apt apt-get install gh
+
+# Authenticate
+gh auth login
+```
+
+### 3.2 Git Setup
+
+```bash
+# Configure Git
+git config --global user.name "Your Name"
+git config --global user.email "email@example.com"
+
+# Set default editor
+git config --global core.editor "code --wait"
+
+# Configure aliases
+git config --global alias.st status
+git config --global alias.co checkout
+```
+
+### 3.3 Environment Variables
+
+| Variable | Purpose |
+|----------|---------|
+| `GH_TOKEN` | GitHub API token |
+| `GIT_AUTHOR_NAME` | Author name |
+| `GIT_COMMITTER_NAME` | Committer name |
+
+---
+
+## 4. Gate 3: Command Usage
+
+### 4.1 Common Workflows
+
+#### Create and Submit PR
+
+```bash
+# Create feature branch
+git checkout -b feature/my-feature
+
+# Make changes
+git add .
+git commit -m "feat: add new feature"
+
+# Push branch
+git push -u origin feature/my-feature
+
+# Create PR
+gh pr create --title "feat: add new feature" --body "Description"
+```
+
+#### Review and Merge PR
+
+```bash
+# View PR
+gh pr view 123
+
+# Review PR
+gh pr create-review --pr 123 --body "Looks good!"
+
+# Merge PR
+gh pr merge 123 --squash --auto
+```
+
+#### Manage Issues
+
+```bash
+# List issues
+gh issue list --state open
+
+# Create issue
+gh issue create --title "Bug: something broken" --body "Steps to reproduce..."
+
+# Close issue
+gh issue close 123
+```
+
+### 4.2 Command Patterns
+
+| Pattern | Usage |
+|---------|-------|
+| `gh repo view` | Get repo info |
+| `gh pr list` | List PRs |
+| `gh issue list` | List issues |
+| `git log --oneline` | View history |
+
+---
+
+## 5. Gate 4: Command Customization
+
+### 5.1 Git Aliases
+
+```bash
+# Useful aliases
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.unstage 'reset HEAD --'
+```
+
+### 5.2 Shell Functions
+
+```bash
+# Quick PR creation function
+function gpr() {
+  git add .
+  git commit -m "$1"
+  git push
+  gh pr create --title "$1"
+}
+
+# Usage: gpr "feat: new feature"
+```
+
+### 5.3 Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `.gitconfig` | Git configuration |
+| `gh/config.yml` | GitHub CLI config |
+| `.bashrc/.zshrc` | Shell aliases |
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Purpose |
+|------|---------|
+| github-commands.md | GitHub CLI reference |
+| branch-workflow.md | Branch workflow patterns |
+| guide.yaml | This file |
+
+### 6.2 Integration Points
+
+| File | References |
+|------|------------|
+| github-commands.md | ../../core/guide.md |
+| branch-workflow.md | ../../core/guide.md |
+| Both Files | ../../Pull-Request-Workflow/ |
+| Both Files | ../../Issue-Management/ |
+
+---
+
+## 7. Command Patterns
+
+### 7.1 Repository Patterns
+
+| Task | Command |
+|------|---------|
+| Clone repo | `gh repo clone owner/repo` |
+| View repo | `gh repo view owner/repo` |
+| List collaborators | `gh api repos/owner/repo/collaborators` |
+
+### 7.2 Issue Patterns
+
+| Task | Command |
+|------|---------|
+| Create issue | `gh issue create --title "title" --body "body"` |
+| List issues | `gh issue list --state open --limit 10` |
+| View issue | `gh issue view 123` |
+| Close issue | `gh issue close 123` |
+
+### 7.3 PR Patterns
+
+| Task | Command |
+|------|---------|
+| Create PR | `gh pr create --title "title" --body "body"` |
+| List PRs | `gh pr list --state open` |
+| Review PR | `gh pr create-review --pr 123 --body "review"` |
+| Merge PR | `gh pr merge 123 --squash --auto` |
+| View diff | `gh pr diff 123` |
+
+### 7.4 Branch Patterns
+
+| Task | Command |
+|------|---------|
+| Create branch | `git checkout -b feature/name` |
+| List branches | `git branch -a` |
+| Switch branch | `git checkout branch-name` |
+| Delete branch | `git branch -D branch-name` |
+| Sync with main | `git rebase main` |
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Command Issues
+
+| Error | Solution |
+|-------|----------|
+| Authentication failed | `gh auth login` |
+| Repository not found | Check owner/repo spelling |
+| Permission denied | Check repository access |
+| Invalid reference | Check branch name exists |
+
+### 8.2 Debug Commands
+
+```bash
+# Check authentication
+gh auth status
+
+# View config
+gh config get
+
+# Debug Git
+git config --list
+git remote -v
+
+# Check token
+echo $GH_TOKEN
+```
+
+---
+
+## Quick Start
+
+```bash
+# Setup
+gh auth login
+git config --global user.name "Your Name"
+
+# Quick workflow
+gh repo clone owner/repo
+cd repo
+git checkout -b feature/new-feature
+# Make changes
+git add . && git commit -m "feat: new feature"
+git push -u origin feature/new-feature
+gh pr create --title "feat: new feature"
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Master these commands to work efficiently with GitHub and Git.*

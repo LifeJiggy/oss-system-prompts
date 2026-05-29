@@ -1,0 +1,317 @@
+# Feature Development - Usage Guide
+
+> Comprehensive guide for feature development in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Feature Development Overview](#1-feature-development-overview)
+2. [Gate 1: Feature Planning](#2-gate-1-feature-planning)
+3. [Gate 2: Feature Design](#3-gate-2-feature-design)
+4. [Gate 3: Feature Implementation](#4-gate-3-feature-implementation)
+5. [Gate 4: Feature Delivery](#5-gate-4-feature-delivery)
+6. [File References](#6-file-references)
+7. [Development Patterns](#7-development-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Feature Development Overview
+
+Feature development is the process of adding new functionality to open source projects. This folder provides guidance for high-frequency and low-frequency features.
+
+### The Three Core Files
+
+| File | Purpose | Lines |
+|------|---------|-------|
+| High-frequence-features-Pro.md | Common feature development | 1538 |
+| Low-frequence-features-Pro.md | Edge case features | 1725 |
+| Tool-Calling-MCP-Integration.md | MCP tool integration | - |
+
+### The Four Types of Features
+
+| Type | Frequency | Complexity | Examples |
+|------|-----------|------------|----------|
+| **High-frequency** | Daily/Weekly | Low-Medium | CRUD operations, basic UI |
+| **Low-frequency** | Monthly/Yearly | High | Architecture changes, major features |
+| **Platform** | Per release | Variable | Cross-cutting concerns |
+| **Infrastructure** | Ongoing | Variable | Tooling, CI/CD |
+
+---
+
+## 2. Gate 1: Feature Planning
+
+### 2.1 Feature Planning Process
+
+```
+1. Ideation
+   ├─ User request
+   ├─ Product requirement
+   └─ Technical opportunity
+
+2. Evaluation
+   ├─ Impact assessment
+   ├─ Effort estimation
+   └─ Dependencies
+
+3. Prioritization
+   ├─ Roadmap alignment
+   ├─ Resource availability
+   └─ Risk assessment
+
+4. Planning
+   ├─ Break into tasks
+   ├─ Set timeline
+   └─ Assign ownership
+```
+
+### 2.2 Feature Evaluation Matrix
+
+| Criterion | Weight | Scoring |
+|-----------|--------|---------|
+| **User Value** | 30% | High/Medium/Low |
+| **Technical Fit** | 25% | Good/Neutral/Bad |
+| **Effort** | 20% | Small/Medium/Large |
+| **Risk** | 15% | Low/Medium/High |
+| **Dependencies** | 10% | None/External/Internal |
+
+### 2.3 Planning Integration
+
+Connects to:
+- **Issue-Management**: Feature issues
+- **PR-Templates**: Feature PR templates
+- **task**: Feature tasks
+
+---
+
+## 3. Gate 2: Feature Design
+
+### 3.1 Design Principles
+
+| Principle | Description |
+|-----------|-------------|
+| **Simplicity** | Solve with minimal complexity |
+| **Consistency** | Match existing patterns |
+| **Extensibility** | Design for future growth |
+| **Testability** | Easy to verify |
+| **Maintainability** | Easy to modify |
+
+### 3.2 Design Documentation
+
+```markdown
+# Feature Design: [Name]
+
+## Problem Statement
+What problem does this solve?
+
+## Proposed Solution
+How does it solve the problem?
+
+## Alternatives Considered
+What other approaches were evaluated?
+
+## Trade-offs
+What are the pros and cons?
+
+## Implementation Plan
+Steps to implement
+```
+
+### 3.3 Design Patterns
+
+| Pattern | Use Case |
+|---------|----------|
+| **Plugin Architecture** | Extendable features |
+| **Configuration** | User-customizable |
+| **API-first** | Developer-friendly |
+| **Progressive Enhancement** | Graceful degradation |
+
+---
+
+## 4. Gate 3: Feature Implementation
+
+### 4.1 Implementation Workflow
+
+```
+1. Setup
+   ├─ Create branch
+   ├─ Setup environment
+   └─ Review existing code
+
+2. Develop
+   ├─ Write code
+   ├─ Add tests
+   └─ Update docs
+
+3. Verify
+   ├─ Run tests
+   ├─ Manual verification
+   └─ Code review
+
+4. Iterate
+   ├─ Address feedback
+   ├─ Fix issues
+   └─ Optimize
+```
+
+### 4.2 Implementation Checklist
+
+- [ ] Branch from correct base
+- [ ] Follow project conventions
+- [ ] Write comprehensive tests
+- [ ] Update documentation
+- [ ] Run all quality checks
+- [ ] Self-review complete
+
+### 4.3 Implementation Integration
+
+Connects to:
+- **Build-Systems**: Build requirements
+- **Code-Quality**: Testing requirements
+- **Core-Development-Roles**: Contributor patterns
+
+---
+
+## 5. Gate 4: Feature Delivery
+
+### 5.1 Delivery Process
+
+```
+1. Pre-release
+   ├─ Final testing
+   ├─ Documentation review
+   ├─ Performance check
+   └─ Security review
+
+2. Release
+   ├─ Create release branch
+   ├─ Update version
+   ├─ Create changelog
+   └─ Publish packages
+
+3. Post-release
+   ├─ Monitor issues
+   ├─ Gather feedback
+   ├─ Document lessons
+   └─ Plan next steps
+```
+
+### 5.2 Feature Flags
+
+Use feature flags for gradual rollout:
+
+```yaml
+features:
+  new_feature:
+    enabled: false
+    rollout_percentage: 10
+    target_users: ["beta-testers"]
+```
+
+### 5.3 Delivery Patterns
+
+| Pattern | Use Case |
+|---------|----------|
+| **Canary Release** | Gradual rollout |
+| **A/B Testing** | Compare approaches |
+| **Rollback Plan** | Quick revert |
+| **Monitoring** | Track metrics |
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Purpose |
+|------|---------|
+| High-frequence-features-Pro.md | Common feature patterns |
+| Low-frequence-features-Pro.md | Complex feature patterns |
+| Tool-Calling-MCP-Integration.md | MCP integration |
+| guide.yaml | This file |
+
+### 6.2 Integration Points
+
+| File | References |
+|------|------------|
+| High-frequence-features-Pro.md | ../Core-Development-Roles/Contributor-Pro.md |
+| Low-frequence-features-Pro.md | ../Code-Quality/Testing-Pro.md |
+| Tool-Calling-MCP-Integration.md | ../PR-Templates/ |
+
+---
+
+## 7. Development Patterns
+
+### 7.1 High-Frequency Feature Patterns
+
+| Feature Type | Pattern |
+|--------------|---------|
+| **API Endpoint** | Router → Controller → Service → Repository |
+| **UI Component** | Props → Render → Events → State |
+| **CLI Command** | Parse args → Validate → Execute → Format output |
+| **Documentation** | Overview → Quick start → API → Examples |
+
+### 7.2 Low-Frequency Feature Patterns
+
+| Pattern | Use Case |
+|---------|----------|
+| **Architecture Change** | RFC → Design → Implementation → Migration |
+| **Major Refactor** | Branch → Rewrite → Test → Merge |
+| **New Integration** | Research → Design → Code → Test → Document |
+
+### 7.3 Feature Tracking
+
+```yaml
+# Feature tracking
+features:
+  - name: "New Authentication"
+    status: "In Development"
+    owner: "@developer"
+    eta: "2024-02-15"
+    pr: "#1234"
+    tests: "80%"
+```
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Feature Issues
+
+| Problem | Solution |
+|---------|----------|
+| Scope creep | Break into smaller features |
+| Technical debt | Allocate time for cleanup |
+| Performance issues | Profile, optimize, cache |
+| User confusion | Improve docs, add examples |
+
+### 8.2 Feature Success Metrics
+
+| Metric | Target |
+|--------|--------|
+| Adoption rate | > 50% users |
+| Error rate | < 1% |
+| Performance | < 100ms |
+| User satisfaction | > 4.0/5.0 |
+
+---
+
+## Quick Start
+
+```bash
+# Start a new feature
+git checkout -b feature/name
+# Create issue
+gh issue create --title "Feature: name" --body "description"
+# Implement
+# Test
+# Create PR
+gh pr create --title "feat: name" --body "Closes #123"
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Great features solve real problems with elegant solutions.*

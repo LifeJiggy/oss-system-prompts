@@ -1,0 +1,298 @@
+# PR Templates - Usage Guide
+
+> Comprehensive guide for pull request templates in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [PR Templates Overview](#1-pr-templates-overview)
+2. [Gate 1: Template Selection](#2-gate-1-template-selection)
+3. [Gate 2: Template Usage](#3-gate-2-template-usage)
+4. [Gate 3: Customization](#4-gate-3-customization)
+5. [Gate 4: Validation](#5-gate-4-validation)
+6. [File References](#6-file-references)
+7. [Template Patterns](#7-template-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. PR Templates Overview
+
+PR templates provide structured, consistent descriptions for pull requests, improving communication and review efficiency.
+
+### The Three Template Types
+
+| Type | Format | Use Case |
+|------|--------|----------|
+| **Python Scripts** | `.py` | Generate, validate programmatically |
+| **JavaScript Scripts** | `.js` | Node.js automation |
+| **Markdown** | `.md` | Direct copy-paste use |
+
+### Template Categories
+
+| Category | Count | Purpose |
+|----------|-------|---------|
+| Python Scripts | 7 | Run to generate/validate |
+| JavaScript Scripts | 7 | Node.js integration |
+| Markdown Templates | 29 | Direct PR descriptions |
+
+---
+
+## 2. Gate 1: Template Selection
+
+### 2.1 Template Selection Matrix
+
+| Change Type | Recommended Template |
+|-------------|---------------------|
+| Bug fix | `Issue-fixer-Pro.md`, `features-bugfix.py` |
+| New feature | `High-frequence-features-Pro.md`, `features-integration.py` |
+| Code review | `Reveiwer-Pro.md`, `features-review.py` |
+| Documentation | `Documentation-Pro.md`, `features-docs.py` |
+| Tests | `Testing-Pro.md`, `features-tests.py` |
+| Refactoring | `Low-frequence-features-Pro.md`, `features-refactor.py` |
+
+### 2.2 Selection Criteria
+
+1. **Match the change type** - Bug fix, feature, docs, etc.
+2. **Consider audience** - Reviewers, maintainers, users
+3. **Check complexity** - Simple change vs complex feature
+4. **Review requirements** - What needs to be communicated
+
+---
+
+## 3. Gate 2: Template Usage
+
+### 3.1 Markdown Template Usage
+
+```bash
+# View available templates
+ls Templates/
+
+# Copy template
+cat Templates/Contributor-Pro.md
+
+# Use in PR description
+# Paste content into GitHub PR description
+```
+
+### 3.2 Python Script Usage
+
+```bash
+# Generate template
+python PY/features-file.py
+
+# Run validation
+python -c "from PY.features_file import validate_file_changes"
+
+# Save to file
+python PY/features-bugfix.py > bug-fix-pr.md
+```
+
+### 3.3 JavaScript Script Usage
+
+```bash
+# Generate template
+node JS/features-file.js
+
+# Run validation
+node -e "require('./JS/features-file').validateFileChanges(['file.js'])"
+```
+
+---
+
+## 4. Gate 3: Customization
+
+### 4.1 Customization Checklist
+
+- [ ] Update PR title to match changes
+- [ ] Fill in all relevant sections
+- [ ] Replace placeholders with actual values
+- [ ] Add specific details for reviewers
+- [ ] Link to related issues
+- [ ] Update checklists appropriately
+
+### 4.2 Placeholder Examples
+
+| Placeholder | Replacement |
+|-------------|-------------|
+| `<!-- Brief description -->` | "Fix null pointer in user service" |
+| `{ISSUE_NUMBER}` | "123" |
+| `{AUTHOR_NAME}` | "Jane Doe" |
+| `{TEST_COVERAGE}` | "85%" |
+
+### 4.3 Customization Patterns
+
+```markdown
+## Changes Details
+- File: src/user/service.ts
+- Change: Added null check for getUser()
+- Impact: Prevents crash when user not found
+
+## Testing
+- Unit tests: Added 3 new test cases
+- Integration tests: Pass
+- Manual testing: Verified fix works
+```
+
+---
+
+## 5. Gate 4: Validation
+
+### 5.1 Pre-Submission Validation
+
+- [ ] Template properly filled out
+- [ ] No placeholder text remaining
+- [ ] All required sections completed
+- [ ] Links work correctly
+- [ ] Code blocks are valid
+- [ ] Checkboxes are accurate
+
+### 5.2 Automated Validation
+
+```bash
+# Python validation
+python -c "
+from PY.features_file import validate_file_changes
+result = validate_file_changes(['src/file.ts'])
+print(f'Valid: {result}')
+"
+
+# JavaScript validation
+node -e "
+const { validateFileChanges } = require('./JS/features-file');
+const result = validateFileChanges(['file.js']);
+console.log('Valid:', result);
+"
+```
+
+### 5.3 Review Readiness
+
+Before submitting:
+
+- [ ] PR title follows conventions
+- [ ] Description is clear and complete
+- [ ] All checkboxes accurate
+- [ ] No sensitive information included
+- [ ] Reviewer(s) identified
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Purpose |
+|------|---------|
+| README.md | PR Templates documentation |
+| guide.yaml | This file |
+
+### 6.2 Template Files
+
+| Location | Files |
+|----------|-------|
+| `PY/` | 7 Python scripts |
+| `JS/` | 7 JavaScript scripts |
+| `Templates/` | 29 Markdown templates |
+
+### 6.3 Integration Points
+
+| File | References |
+|------|------------|
+| guide.yaml | ../Core-Development-Roles/ |
+| guide.yaml | ../Issue-Management/ |
+| guide.yaml | ../../core/guide.md |
+
+---
+
+## 7. Template Patterns
+
+### 7.1 Markdown Template Pattern
+
+```markdown
+## Pull Request: [Title]
+
+### Overview
+Brief description of the change.
+
+### Changes
+- File 1: Description
+- File 2: Description
+
+### Testing
+- [ ] Unit tests
+- [ ] Integration tests
+- [ ] Manual testing
+
+### Checklist
+- [ ] Code reviewed
+- [ ] Tests pass
+- [ ] Documentation updated
+```
+
+### 7.2 Script Template Pattern
+
+```python
+def create_pr_template():
+    return f"""
+## Pull Request: {title}
+
+### Overview
+{description}
+
+### Changes
+{changes}
+
+### Testing
+{testing}
+
+### Checklist
+{checklist}
+"""
+
+def validate_changes(files):
+    # Validation logic
+    return True
+```
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Template Issues
+
+| Problem | Solution |
+|---------|----------|
+| Missing sections | Use full template |
+| Placeholder not replaced | Search and replace |
+| Invalid code blocks | Fix syntax highlighting |
+| Broken links | Update URLs |
+
+### 8.2 Script Execution Issues
+
+| Error | Solution |
+|-------|----------|
+| Module not found | Install dependencies |
+| Permission denied | Check file permissions |
+| Syntax error | Check Python/Node version |
+
+---
+
+## Quick Start
+
+```bash
+# View templates
+ls Templates/
+
+# Generate from script
+python PY/features-bugfix.py
+
+# Use markdown directly
+cat Templates/Contributor-Pro.md
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Good PR templates lead to faster reviews and better merges.*

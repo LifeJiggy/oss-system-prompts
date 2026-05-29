@@ -1,0 +1,358 @@
+# Language-Specific Contributors - Usage Guide
+
+> Comprehensive guide for language-specific contributions across Python, JavaScript, and Shell.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Language Contributors Overview](#1-language-contributors-overview)
+2. [Gate 1: Language Selection](#2-gate-1-language-selection)
+3. [Gate 2: Environment Setup](#3-gate-2-environment-setup)
+4. [Gate 3: Contribution Workflow](#4-gate-3-contribution-workflow)
+5. [Gate 4: Best Practices](#5-gate-4-best-practices)
+6. [Language-Specific Guides](#6-language-specific-guides)
+7. [Integration Patterns](#7-integration-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Language Contributors Overview
+
+This folder provides specialized guidance for contributing to projects in Python, JavaScript, and Shell. Each language has unique conventions, tooling, and best practices.
+
+### The Three Language Pillars
+
+| Language | Ecosystem | Key Tools |
+|----------|-----------|-----------|
+| **Python** | PyPI, Poetry, pytest | pip, poetry, pytest, mypy |
+| **JavaScript** | npm, Yarn, pnpm | npm, webpack, vite, jest |
+| **Shell** | POSIX, bash, make | bash, sh, make, awk |
+
+### When to Use Each Language Guide
+
+- **Contributor-Python-Pro.md**: Python projects, libraries, applications
+- **Contributor-JavaScript-Pro.md**: Web projects, Node.js, frontend frameworks
+- **Contributor-Shell-Pro.md**: CLI tools, automation scripts, infrastructure
+
+---
+
+## 2. Gate 1: Language Selection
+
+### 2.1 Language Decision Matrix
+
+| Project Type | Recommended Language | Reason |
+|--------------|---------------------|--------|
+| Data Science | Python | Rich ecosystem, pandas, numpy |
+| Web Frontend | JavaScript | Browser-native, React/Vue |
+| Web Backend | Python or JavaScript | FastAPI or Node.js |
+| CLI Tools | Shell or Python | Shell for simple, Python for complex |
+| Infrastructure | Shell | POSIX compatibility |
+
+### 2.2 Ecosystem Integration
+
+Each language integrates with:
+
+- **Python**: PyPI packages, virtual environments, type hints
+- **JavaScript**: npm packages, modules, transpilation
+- **Shell**: POSIX standards, shebang, exit codes
+
+---
+
+## 3. Gate 2: Environment Setup
+
+### 3.1 Python Environment
+
+```bash
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate      # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+# or
+poetry install
+
+# Verify setup
+python -c "import module; print('OK')"
+```
+
+### 3.2 JavaScript Environment
+
+```bash
+# Install Node.js (v18+ recommended)
+nvm install 18
+nvm use 18
+
+# Install dependencies
+npm install
+# or
+yarn install
+# or
+pnpm install
+
+# Verify setup
+node -e "console.log('OK')"
+```
+
+### 3.3 Shell Environment
+
+```bash
+# Check shell version
+bash --version
+sh --version
+
+# Install linting tools
+shellcheck --version
+
+# Test script syntax
+bash -n script.sh
+```
+
+---
+
+## 4. Gate 3: Contribution Workflow
+
+### 4.1 Language-Specific Workflow
+
+```
+1. Fork and Clone
+   ├─ Python: python -m venv venv
+   ├─ JavaScript: npm install
+   └─ Shell: Review Makefile
+
+2. Create Branch
+   ├─ All: git checkout -b feature/name
+
+3. Implement
+   ├─ Python: Follow PEP standards
+   ├─ JavaScript: Follow ES standards
+   └─ Shell: Follow POSIX conventions
+
+4. Test
+   ├─ Python: pytest tests/
+   ├─ JavaScript: npm test
+   └─ Shell: make test
+
+5. Document
+   ├─ Python: Docstrings, README
+   ├─ JavaScript: JSDoc, README
+   └─ Shell: Comments, README
+
+6. Submit
+   ├─ All: Create PR with issue reference
+```
+
+### 4.2 Testing by Language
+
+| Language | Test Framework | Command |
+|----------|----------------|---------|
+| Python | pytest | `pytest tests/` |
+| JavaScript | Jest/Vitest | `npm test` |
+| Shell | bats/shunit2 | `bats tests/` |
+
+---
+
+## 5. Gate 4: Best Practices
+
+### 5.1 Python Best Practices
+
+- Use type hints for all public functions
+- Follow PEP 8 style guide
+- Use docstrings for documentation
+- Keep functions under 50 lines
+- Use context managers for resources
+
+```python
+def process_data(data: dict[str, Any]) -> dict[str, Any]:
+    """Process input data and return results."""
+    with open("output.json", "w") as f:
+        json.dump(data, f)
+    return {"status": "success"}
+```
+
+### 5.2 JavaScript Best Practices
+
+- Use ES modules (import/export)
+- Follow TypeScript for type safety
+- Use async/await for promises
+- Destructure for cleaner code
+- Use optional chaining for safety
+
+```javascript
+import { processData } from './processor.js';
+
+async function main() {
+  const data = { key: 'value' };
+  const result = await processData(data);
+  console.log(result?.status ?? 'unknown');
+}
+```
+
+### 5.3 Shell Best Practices
+
+- Use `#!/usr/bin/env bash` for portability
+- Quote all variables
+- Check exit codes
+- Use functions for reusability
+- Avoid complex one-liners
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+process_file() {
+  local file="$1"
+  if [[ ! -f "$file" ]]; then
+    echo "Error: $file not found" >&2
+    return 1
+  fi
+  cat "$file"
+}
+```
+
+---
+
+## 6. Language-Specific Guides
+
+### 6.1 Python Contributor Guide
+
+**File**: Contributor-Python-Pro.md
+
+Key topics:
+- PEP standards compliance
+- Virtual environment management
+- Package structure
+- Testing with pytest
+- Documentation with docstrings
+
+**Integration points**:
+- Build-Systems/Python-Build-Pro.md
+- Code-Quality/Testing-Pro.md
+- Core-Development-Roles/Contributor-Pro.md
+
+### 6.2 JavaScript Contributor Guide
+
+**File**: Contributor-JavaScript-Pro.md
+
+Key topics:
+- ES modules and imports
+- TypeScript integration
+- Node.js and browser compatibility
+- Testing with Jest/Vitest
+- Package.json management
+
+**Integration points**:
+- Build-Systems/JavaScript-Build-Pro.md
+- Code-Quality/Testing-Pro.md
+- Core-Development-Roles/Contributor-Pro.md
+
+### 6.3 Shell Contributor Guide
+
+**File**: Contributor-Shell-Pro.md
+
+Key topics:
+- POSIX compliance
+- Bash best practices
+- Makefile patterns
+- Error handling
+- Cross-platform considerations
+
+**Integration points**:
+- Build-Systems/Shell-Build-Pro.md
+- Quick-Reference-Commands/branch-workflow.md
+- Core-Development-Roles/Contributor-Pro.md
+
+---
+
+## 7. Integration Patterns
+
+### 7.1 Cross-Language Integration
+
+| Pattern | Python | JavaScript | Shell |
+|---------|--------|------------|-------|
+| Configuration | pyproject.toml | package.json | .env, args |
+| Testing | pytest | jest | bats |
+| Linting | flake8 | eslint | shellcheck |
+| Type Checking | mypy | tsc | shellcheck |
+
+### 7.2 Multi-Language Projects
+
+For projects using multiple languages:
+
+```yaml
+# Example: Python + Shell hybrid
+project/
+├── src/           # Python source
+├── scripts/       # Shell scripts
+├── tests/
+│   ├── python/    # pytest
+│   └── shell/     # bats
+├── pyproject.toml
+└── Makefile
+```
+
+### 7.3 Reference Integration
+
+| Current File | References |
+|--------------|------------|
+| Python Guide | ../Build-Systems/Python-Build-Pro.md |
+| JavaScript Guide | ../Build-Systems/JavaScript-Build-Pro.md |
+| Shell Guide | ../Build-Systems/Shell-Build-Pro.md |
+| All Guides | ../../core/patterns.md |
+| All Guides | ../../Code-Quality/Testing-Pro.md |
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Python Issues
+
+| Error | Solution |
+|-------|----------|
+| ModuleNotFoundError | pip install, check PYTHONPATH |
+| ImportError | Check __init__.py, relative imports |
+| SyntaxError | Check Python version, syntax |
+
+### 8.2 JavaScript Issues
+
+| Error | Solution |
+|-------|----------|
+| Module not found | npm install, check node_modules |
+| SyntaxError | Check ES version, transpile |
+| TypeError | Check types, use TypeScript |
+
+### 8.3 Shell Issues
+
+| Error | Solution |
+|-------|----------|
+| Command not found | Check PATH, use full path |
+| Permission denied | chmod +x, check permissions |
+| Syntax error | Check shell, use bash |
+
+---
+
+## Quick Start
+
+```bash
+# Python
+python -m venv venv && source venv/bin/activate
+pip install -e .
+pytest tests/
+
+# JavaScript
+npm install
+npm run dev
+npm test
+
+# Shell
+make build
+./scripts/test.sh
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Choose the right language for the right job, and contribute with confidence.*

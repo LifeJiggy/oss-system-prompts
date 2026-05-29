@@ -1,0 +1,307 @@
+# Task Management - Usage Guide
+
+> Comprehensive guide for task management in open source projects.
+> Part of the LifeJiggy OSS Enhancement Framework
+
+---
+
+## Table of Contents
+
+1. [Task Management Overview](#1-task-management-overview)
+2. [Gate 1: Task Planning](#2-gate-1-task-planning)
+3. [Gate 2: Task Creation](#3-gate-2-task-creation)
+4. [Gate 3: Task Execution](#4-gate-3-task-execution)
+5. [Gate 4: Task Completion](#5-gate-4-task-completion)
+6. [File References](#6-file-references)
+7. [Task Patterns](#7-task-patterns)
+8. [Troubleshooting](#8-troubleshooting)
+
+---
+
+## 1. Task Management Overview
+
+Task management provides structure for organizing and executing work in open source projects.
+
+### The Task Files
+
+| File | Purpose |
+|------|---------|
+| task-docs.md | Documentation guide |
+| task-enhance.md | Enhancement tasks |
+| task-feat.md | Feature development |
+| task-fix.md | Bug fixing |
+| task-governance.md | Governance tasks |
+| task-release.md | Release tasks |
+| task-review.md | Review tasks |
+
+### Task Categories
+
+| Category | Purpose |
+|----------|---------|
+| **Documentation** | Improving docs |
+| **Enhancement** | Improving existing features |
+| **Feature** | New functionality |
+| **Fix** | Bug resolution |
+| **Governance** | Project governance |
+| **Release** | Release management |
+| **Review** | Code/process review |
+
+---
+
+## 2. Gate 1: Task Planning
+
+### 2.1 Task Planning Process
+
+```
+1. Identify Work
+   ├─ From issues
+   ├─ From roadmap
+   ├─ From user feedback
+   
+2. Prioritize
+   ├─ Impact assessment
+   ├─ Effort estimation
+   ├─ Dependencies
+   
+3. Plan
+   ├─ Break into subtasks
+   ├─ Assign owners
+   ├─ Set deadlines
+```
+
+### 2.2 Task Sizing
+
+| Size | Effort | Subtasks | Recommendation |
+|------|--------|----------|----------------|
+| XS | < 1 day | 0-1 | Do immediately |
+| S | 1-3 days | 1-2 | Assign to contributor |
+| M | 3-7 days | 2-5 | Break into smaller tasks |
+| L | 1-2 weeks | 5+ | Create epic, break down |
+| XL | > 2 weeks | Many | Must break down |
+
+### 2.3 Planning Integration
+
+Connects to:
+- **Issue-Management**: Issue prioritization
+- **PR-Templates**: Task PR templates
+- **Release & Versioning**: Release planning
+
+---
+
+## 3. Gate 2: Task Creation
+
+### 3.1 Task Creation Template
+
+```markdown
+# Task: [Task Name]
+
+## Description
+Clear description of the task.
+
+## Goals
+- Goal 1
+- Goal 2
+
+## Acceptance Criteria
+- [ ] Criterion 1
+- [ ] Criterion 2
+
+## Dependencies
+- Task A
+- Task B
+
+## References
+- Issue #123
+- PR #456
+```
+
+### 3.2 Task Types
+
+| Type | When to Use |
+|------|-------------|
+| **Feature** | New functionality |
+| **Bug** | Fix broken behavior |
+| **Task** | Refactoring, cleanup |
+| **Spike** | Research/exploration |
+| **Chore** | Maintenance work |
+
+### 3.3 Task Integration
+
+Connects to:
+- **Core-Development-Roles**: Role assignment
+- **Issue-Management**: Issue linking
+- **PR-Templates**: PR creation
+
+---
+
+## 4. Gate 3: Task Execution
+
+### 4.1 Execution Workflow
+
+```
+Plan → Execute → Review → Revise → Complete
+```
+
+### 4.2 Execution Patterns
+
+| Pattern | Description |
+|---------|-------------|
+| **Time-boxing** | Allocate fixed time |
+| **Pomodoro** | 25 min focused work |
+| **Pair programming** | Two people, one keyboard |
+| **Spike then implement** | Research then build |
+
+### 4.3 Progress Tracking
+
+| Method | Tool |
+|--------|------|
+| **Task board** | GitHub Projects, Trello |
+| **Time tracking** | Harvest, Clockify |
+| **Progress notes** | Daily standups |
+| **Status updates** | Slack, Discord |
+
+---
+
+## 5. Gate 4: Task Completion
+
+### 5.1 Completion Checklist
+
+- [ ] All acceptance criteria met
+- [ ] Tests passing
+- [ ] Documentation updated
+- [ ] PR merged
+- [ ] Issue closed
+- [ ] Knowledge shared
+
+### 5.2 Completion Patterns
+
+| Action | Command |
+|--------|---------|
+| Close issue | `gh issue close 123` |
+| Mark PR ready | `gh pr ready 123` |
+| Move to done | GitHub Projects drag |
+| Notify team | Comment on issue |
+
+### 5.3 Retrospective
+
+After completion:
+
+1. What went well?
+2. What could be improved?
+3. What did we learn?
+
+---
+
+## 6. File References
+
+### 6.1 Current Folder Files
+
+| File | Purpose |
+|------|---------|
+| task-docs.md | Documentation tasks |
+| task-enhance.md | Enhancement tasks |
+| task-feat.md | Feature development |
+| task-fix.md | Bug fixing |
+| task-governance.md | Governance tasks |
+| task-release.md | Release tasks |
+| task-review.md | Review tasks |
+
+### 6.2 Integration Points
+
+| File | References |
+|------|------------|
+| All task files | ../core/guide.md |
+| task-fix.md | ../Issue-Management/ |
+| task-release.md | ../Release & Versioning/ |
+| task-review.md | ../Pull-Request-Workflow/ |
+
+---
+
+## 7. Task Patterns
+
+### 7.1 Task Creation Patterns
+
+| Scenario | Pattern |
+|----------|---------|
+| New feature | Create issue → Plan → Implement → Review |
+| Bug fix | Find issue → Reproduce → Fix → Test → PR |
+| Refactoring | Create task → Plan → Execute → Review |
+| Release | Plan → Freeze → Test → Tag → Publish |
+
+### 7.2 Task Tracking Patterns
+
+```yaml
+# GitHub issue template
+title: '[FEATURE] New feature name'
+labels: ['feature', 'good first issue']
+projects: ['Roadmap Q1 2024']
+assignees: ['username']
+
+# Task checklist
+- [ ] Requirements defined
+- [ ] Design documented
+- [ ] Implementation started
+- [ ] Tests written
+- [ ] Documentation updated
+```
+
+### 7.3 Task Communication Patterns
+
+| Audience | Format |
+|----------|--------|
+| **Team** | GitHub comment, Slack |
+| **Stakeholders** | Summary email |
+| **Community** | Public issue comment |
+| **Personal** | Private notes |
+
+---
+
+## 8. Troubleshooting
+
+### 8.1 Common Task Issues
+
+| Problem | Solution |
+|---------|----------|
+| Unclear requirements | Ask for clarification |
+| Blocked task | Identify blocker, escalate |
+| Overdue task | Re-estimate, adjust plan |
+| duplicated work | Check existing issues |
+
+### 8.2 Task Recovery
+
+```bash
+# Check task status
+gh issue view 123
+
+# Update assignee
+gh issue edit 123 --assignee new-person
+
+# Add comment
+gh issue comment 123 --body "Status update"
+
+# Close with reason
+gh issue close 123 --comment "Won't implement"
+```
+
+---
+
+## Quick Start
+
+```bash
+# Create a task
+gh issue create --title "Task: description" --body "details"
+
+# Assign yourself
+gh issue edit 123 --assignee @me
+
+# Add label
+gh issue edit 123 --add-label "task"
+
+# Track in project
+gh project add 123 --project "Roadmap"
+```
+
+---
+
+*This guide is part of the LifeJiggy OSS Enhancement Framework.*
+*Well-planned tasks lead to successful outcomes.*
